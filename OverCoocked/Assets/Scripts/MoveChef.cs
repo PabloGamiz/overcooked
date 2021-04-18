@@ -8,10 +8,12 @@ public class MoveChef : MonoBehaviour
     public float speed = 7.0f;
     public float rotationSpeed= 720.0f;
 
+    private Rigidbody rb;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody>(); 
     }
 
     // Update is called once per frame
@@ -37,5 +39,31 @@ public class MoveChef : MonoBehaviour
 
             gameObject.transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         }
+      
     }
+
+    void OnCollisionEnter(Collision collision)
+    {
+
+        GameObject objeto1 = GameObject.Find("Player");
+        if (collision.gameObject.name != "Ground")
+        {
+            Debug.Log("objeto1 COLISIONADO con objeto2");
+
+            speed = 0;
+        }
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+
+        GameObject objeto1 = GameObject.Find("Player");
+        if (collision.gameObject.name != "Ground")
+        {
+            Debug.Log("objeto1 EXIT con objeto2");
+
+            speed = 7; 
+        }
+    }
+
 }
