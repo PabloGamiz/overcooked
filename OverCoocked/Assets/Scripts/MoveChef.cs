@@ -6,7 +6,7 @@ public class MoveChef : MonoBehaviour
 {
 
     public float speed = 7.0f;
-    public float rotationSpeed= 720.0f;
+    public float rotationSpeed= 1100.0f;
 
     private Rigidbody rb;
 
@@ -46,9 +46,9 @@ public class MoveChef : MonoBehaviour
     {
 
         GameObject objeto1 = GameObject.Find("Player");
-        if (collision.gameObject.name != "Ground")
+        if (collision.gameObject.name != "Ground" && collision.gameObject.name != "tomato")
         {
-            Debug.Log("objeto1 COLISIONADO con objeto2");
+            //Debug.Log("objeto1 COLISIONADO con objeto2");
 
             speed = 0;
         }
@@ -58,9 +58,9 @@ public class MoveChef : MonoBehaviour
     {
 
         GameObject objeto1 = GameObject.Find("Player");
-        if (collision.gameObject.name != "Ground")
+        if (collision.gameObject.name != "Ground" && collision.gameObject.name != "tomato")
         {
-            Debug.Log("objeto1 EXIT con objeto2");
+            //Debug.Log("objeto1 EXIT con objeto2");
 
             speed = 7; 
         }
