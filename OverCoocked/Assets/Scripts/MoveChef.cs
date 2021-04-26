@@ -48,9 +48,9 @@ public class MoveChef : MonoBehaviour
         GameObject objeto1 = GameObject.Find("Player");
         if (collision.gameObject.name != "Ground" && collision.gameObject.name != "tomato")
         {
-            //Debug.Log("objeto1 COLISIONADO con objeto2");
+           
 
-            speed = 0;
+            speed = 1;
         }
     }
 
@@ -60,8 +60,7 @@ public class MoveChef : MonoBehaviour
         GameObject objeto1 = GameObject.Find("Player");
         if (collision.gameObject.name != "Ground" && collision.gameObject.name != "tomato")
         {
-            //Debug.Log("objeto1 EXIT con objeto2");
-
+           
             speed = 7; 
         }
     }
