@@ -16,6 +16,8 @@ public class Pickup : MonoBehaviour
 
     public bool holdingObject;
     bool can;
+    bool canGrabFood; 
+    bool table_cut; 
     public GameObject table; 
     
     // Start is called before the first frame update
@@ -41,6 +43,13 @@ public class Pickup : MonoBehaviour
             }
             
         }
+        else if (canGrabFood)
+        {
+            if (!holdingObject)
+            {
+                GrabFood(); 
+            }
+        }
 
         if (!holdingObject || !can) PickUpThings();
 
@@ -54,18 +63,25 @@ public class Pickup : MonoBehaviour
         if (collision.gameObject.name.Contains( "mesa") )
         {
             can = true;
-            table = collision.gameObject; 
+            table = collision.gameObject;
+            if (collision.gameObject.name.Contains("mesa cortar")) table_cut = true; 
 
+        }
+        else if (collision.gameObject.name.Contains("alimentos"))
+        {
+            canGrabFood = true;
+            table = collision.gameObject;
         }
     }
 
     void OnCollisionExit(Collision collision)
     {
-        if (can)
+        if (can || canGrabFood)
         {
             table = null; 
         }
-        can = false; 
+        can = false;
+        canGrabFood = false;
 
     }
 
@@ -153,6 +169,13 @@ public class Pickup : MonoBehaviour
             }
            
         }
+        else if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (table_cut)
+            {
+                table.GetComponent<CuttingTable>().CutObject();
+            }
+        }
     }
 
 
@@ -160,5 +183,15 @@ public class Pickup : MonoBehaviour
     {
         capCol.height = 1.1f;
         capCol.center = new Vector3(-0.016f, 0.546f, 0.005f);
+    }
+
+
+    void GrabFood()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            table.GetComponent<GrabFood>().GrabFoodFromBox();
+            PickUp(table.GetComponent<GrabFood>().food); 
+        }
     }
 }
