@@ -16,11 +16,13 @@ public class Pickup : MonoBehaviour
 
     public bool holdingObject;
     bool can;
-    bool canGrabFood; 
+    bool canGrabFood;
+    bool canPickUpFood; 
     bool table_cut;
     bool fogon; 
-    public GameObject table; 
-    
+    public GameObject table;
+    GameObject food;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,10 +59,29 @@ public class Pickup : MonoBehaviour
 
     }
 
+    void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.name.Contains("objAlimento"))
+        {
+            Debug.Log("COLLISIOOOOOOOOOOOOOOON");
+            food = collision.gameObject; 
+            canPickUpFood = true; 
+        }
+    }
+
+    void OnTriggerExit(Collider collision)
+    {
+        
+        canPickUpFood = false;
+    }
+
     void OnCollisionEnter(Collision collision)
     {
+        
 
         //GameObject objeto1 = GameObject.Find("Player");
+
+
         if (collision.gameObject.name.Contains( "mesa") )
         {
             can = true;
@@ -98,8 +119,8 @@ public class Pickup : MonoBehaviour
 
     void PickUpThings()
     {
-        Vector3 fwd = transform.TransformDirection(Vector3.Scale(Vector3.forward, transform.localScale));
-        RaycastHit hit;
+        //Vector3 fwd = transform.TransformDirection(Vector3.Scale(Vector3.forward, transform.localScale));
+        /*RaycastHit hit;
         
 
         if (Physics.Raycast(grabDetect.position, fwd, out hit, rayDist) || holdingObject)
@@ -129,11 +150,43 @@ public class Pickup : MonoBehaviour
                 }
 
             }
+        }*/
+
+
+        if (canPickUpFood || holdingObject)
+        {
+
+            if (!holdingObject)
+            {
+                if (Input.GetKeyDown(KeyCode.Q))
+                {
+                    GameObject obj = food;
+                    food = null; 
+                    PickUp(obj);
+                }
+            }
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.Q))
+                {
+
+                    holdingObject = false;
+                    objectHolded.transform.parent = null;
+                    objectHolded.GetComponent<Rigidbody>().useGravity = true;
+                    objectHolded.GetComponent<Rigidbody>().isKinematic = false;
+                    Physics.IgnoreCollision(player.gameObject.GetComponent<Collider>(), objectHolded.GetComponent<Collider>(), false);
+                    ResetCapsuleCollider();
+                }
+
+            }
         }
+
+
     }
 
     void PickUp(GameObject obj)
     {
+        
         holdingObject = true;
         obj.transform.parent = boxHolder;
         obj.transform.position = boxHolder.position;
@@ -175,10 +228,13 @@ public class Pickup : MonoBehaviour
             else 
             {
                 Debug.Log("Fogoon");
-                table.GetComponent<Fogon>().AddFood(objectHolded); 
-                holdingObject = false;
-                //Physics.IgnoreCollision(player.gameObject.GetComponent<Collider>(), objectHolded.GetComponent<Collider>(), false);
-                ResetCapsuleCollider();
+                if (table.GetComponent<Fogon>().AddFood(objectHolded))
+                {
+                    holdingObject = false;
+                    //Physics.IgnoreCollision(player.gameObject.GetComponent<Collider>(), objectHolded.GetComponent<Collider>(), false);
+                    ResetCapsuleCollider();
+                } 
+                
                 
 
             }

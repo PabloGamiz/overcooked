@@ -31,7 +31,7 @@ public class Fogon : MonoBehaviour
         
     }
 
-    public void AddFood(GameObject alim)
+    public bool AddFood(GameObject alim)
     {
         if (tipoOlla)
         {   
@@ -42,17 +42,20 @@ public class Fogon : MonoBehaviour
                 {
                     GameObject newObject = obj.GetComponent<Olla>().AñadirAlimentoOlla(alim, posiconObj);
                     Destroy(obj); 
-                    obj = newObject; 
-                }else if(obj.GetComponent<Olla>().numAlim <= 3 && alim.name.Contains(obj.GetComponent<Olla>().tipoAlimento))
+                    obj = newObject;
+                    return true; 
+                }else if(obj.GetComponent<Olla>().numAlim <= 2 && alim.name.Contains(obj.GetComponent<Olla>().tipoAlimento))
                 {
                     GameObject newObject = obj.GetComponent<Olla>().AñadirAlimento(alim, posiconObj);
                     Destroy(obj); 
-                    obj = newObject; 
+                    obj = newObject;
+                    return true; 
                 }
                 
                 
             }
 
         }
+        return false; 
     }
 }
