@@ -54,7 +54,7 @@ public class Pickup : MonoBehaviour
             }
         }
 
-        if (!holdingObject ||( !can && !canGrabFood)) PickUpThings();
+        if ((!holdingObject && canPickUpFood) ||( !can && !canGrabFood)) PickUpThings();
 
 
     }
@@ -63,7 +63,7 @@ public class Pickup : MonoBehaviour
     {
         if (collision.gameObject.name.Contains("objAlimento"))
         {
-            Debug.Log("COLLISIOOOOOOOOOOOOOOON");
+            //Debug.Log("COLLISIOOOOOOOOOOOOOOON");
             food = collision.gameObject; 
             canPickUpFood = true; 
         }
@@ -96,7 +96,7 @@ public class Pickup : MonoBehaviour
         }
         else if (collision.gameObject.name.Contains("fogon"))
         {
-            Debug.Log("FOGOOOOOOOON");
+            //Debug.Log("FOGOOOOOOOON");
             can = true; 
             fogon = true;
             table = collision.gameObject; 
@@ -109,7 +109,7 @@ public class Pickup : MonoBehaviour
         {
             table = null; 
         }
-        Debug.Log("He salidooooooooo");
+        //Debug.Log("He salidooooooooo");
         can = false;
         canGrabFood = false;
         fogon = false; 
@@ -160,8 +160,7 @@ public class Pickup : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Q))
                 {
-                    GameObject obj = food;
-                    food = null; 
+                    GameObject obj = food; 
                     PickUp(obj);
                 }
             }
@@ -186,7 +185,7 @@ public class Pickup : MonoBehaviour
 
     void PickUp(GameObject obj)
     {
-        
+        Debug.Log("************Lo cojooooooooooo1*****");
         holdingObject = true;
         obj.transform.parent = boxHolder;
         obj.transform.position = boxHolder.position;
@@ -211,7 +210,8 @@ public class Pickup : MonoBehaviour
             {
                 if (!table.GetComponent<InfoTable>().hasObject && !fogon)
                 {
-                    //Debug.Log("Mesaaa");
+                    Debug.Log("Lo pongoooooooooo");
+                    canPickUpFood = false;
                     Transform t = table.GetComponent<InfoTable>().point;
                     table.GetComponent<InfoTable>().obj = objectHolded;
                     table.GetComponent<InfoTable>().hasObject = true;
@@ -227,9 +227,10 @@ public class Pickup : MonoBehaviour
             }
             else 
             {
-                Debug.Log("Fogoon");
+                //Debug.Log("Fogoon");
                 if (table.GetComponent<Fogon>().AddFood(objectHolded))
                 {
+                    Debug.Log("************Lo cojooooooooooo2*****");
                     holdingObject = false;
                     //Physics.IgnoreCollision(player.gameObject.GetComponent<Collider>(), objectHolded.GetComponent<Collider>(), false);
                     ResetCapsuleCollider();
@@ -247,6 +248,7 @@ public class Pickup : MonoBehaviour
         {
             if (table.GetComponent<InfoTable>().hasObject)
             {
+                Debug.Log("************Lo cojooooooooooo2*****");
                 table.GetComponent<InfoTable>().hasObject = false; 
                 PickUp(table.GetComponent<InfoTable>().obj); 
             }
