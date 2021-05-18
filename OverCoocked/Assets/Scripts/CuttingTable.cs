@@ -15,6 +15,7 @@ public class CuttingTable : MonoBehaviour
     public GameObject cutMeet_prefab;
     public GameObject cutMushroom_prefab;
     public GameObject cutPickle_prefab;
+    public GameObject cutLetucce_prefab; 
 
     public StatusBar statusBar;
     int statusObject;
@@ -58,6 +59,11 @@ public class CuttingTable : MonoBehaviour
                 {
                     Destroy(obj);
                     new_obj = (GameObject)Instantiate(cutMeet_prefab, point.position, point.rotation);
+                }
+                else if (obj.name.Contains("lechuga"))
+                {
+                    Destroy(obj);
+                    new_obj = (GameObject)Instantiate(cutLetucce_prefab, point.position, point.rotation);
                 }
                 else
                 {
