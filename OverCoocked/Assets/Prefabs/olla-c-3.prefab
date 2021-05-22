@@ -209,7 +209,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxFood: 0
   tipoAlimento: cebolla
+  tieneAlimento: 1
+  alimentoTerminado: 0
   numAlim: 3
+  ollaVacia_prefab: {fileID: 9007947914065786742, guid: ca87e781b27d2df4683f8a2d88389f1b, type: 3}
   ollaTomate1_prefab: {fileID: 0}
   ollaTomate2_prefab: {fileID: 0}
   ollaTomate3_prefab: {fileID: 0}

@@ -11,7 +11,7 @@ public class StatusBar : MonoBehaviour
     public bool hasFinished; 
     bool cutting;
     
-    float time; 
+    public float time; 
 
 
     void Update()
@@ -22,10 +22,8 @@ public class StatusBar : MonoBehaviour
             SetStatus();
             if (time >= slider.maxValue) //Finish cutting
             {
-                cutting = false;
-                hasFinished = true; 
-                gameObject.SetActive(false);
-                time = 0; 
+                hasFinished = true;
+                AcabaAccion(); 
             }
         }
     }
@@ -56,6 +54,16 @@ public class StatusBar : MonoBehaviour
         slider.value = time;
         fill.color = gradient.Evaluate(slider.normalizedValue); 
     }
+
+    public void AcabaAccion()
+    {
+        cutting = false;
+        gameObject.SetActive(false);
+        time = 0;
+    }
+
+
+
 
   
 }

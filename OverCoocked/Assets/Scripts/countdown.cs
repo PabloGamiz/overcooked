@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class countdown : MonoBehaviour
+public class Countdown : MonoBehaviour
 {
-    public GameObject finish;
+    /*public GameObject finish;
     public GameObject countdown;
     public int seconds = 150;
     public bool takeAway = false;
@@ -62,5 +62,5 @@ public class countdown : MonoBehaviour
         else
             textDisplay.GetComponent<Text>().text = d + ":0" + r;
         takeAway = false;    
-    }
+    }*/
 }

@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class parpadear : MonoBehaviour
+public class Parpadear : MonoBehaviour
 {
-    public GameObject Press;
+    /*public GameObject Press;
     private bool enabled;
     // Start is called before the first frame update
     void Start()
@@ -39,5 +39,5 @@ public class parpadear : MonoBehaviour
             Press.enabled = true;
             enabled = true;
         }
-    }
+    }*/
 }

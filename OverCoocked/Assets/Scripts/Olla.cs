@@ -7,7 +7,12 @@ public class Olla : MonoBehaviour
 
     public int maxFood;
     public string tipoAlimento;
+    public bool tieneAlimento;
+    public bool alimentoTerminado; 
     public int numAlim;
+
+    //Olla Vacia
+    public GameObject ollaVacia_prefab;
 
     //Tomate
     public GameObject ollaTomate1_prefab;
@@ -27,7 +32,7 @@ public class Olla : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -77,6 +82,7 @@ public class Olla : MonoBehaviour
         {
             if (numAlim == 0)
             {
+               
                 newObj = (GameObject)Instantiate(ollaCebolla1_prefab, punto.position, punto.rotation);
             }
             else if (numAlim == 1)
@@ -103,8 +109,15 @@ public class Olla : MonoBehaviour
                 newObj = (GameObject)Instantiate(ollaChamp3_prefab, punto.position, punto.rotation);
             }
         }
-
+        alimentoTerminado= false; 
         Destroy(alim);
         return newObj; 
     }
+
+    public GameObject VaciarOlla(Transform punto)
+    {
+        return (GameObject)Instantiate(ollaVacia_prefab, punto.position, punto.rotation); 
+    }
+
+
 }

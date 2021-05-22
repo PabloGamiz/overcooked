@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CuttingTable : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class CuttingTable : MonoBehaviour
     public GameObject cutLetucce_prefab; 
 
     public StatusBar statusBar;
+    public Image img;
     int statusObject;
     float time;
 
@@ -29,6 +31,7 @@ public class CuttingTable : MonoBehaviour
         statusBar.SetMax(5);
         time = 0; 
         statusBar.gameObject.SetActive(false);
+        img.enabled =false;
         statusObject = -1;
     }
 
@@ -88,6 +91,7 @@ public class CuttingTable : MonoBehaviour
 
     void FinishCuttingAction()
     {
+        img.enabled = true;
         player.transform.parent = null;
         player.GetComponent<MoveChef>().can_move = true;
     }
