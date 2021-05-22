@@ -47,7 +47,7 @@ public class Pickup : MonoBehaviour
             }
             else
             {
-                PickUpFromTable();
+                CogerObjetoDeLaMesa();
             }
             
         }
@@ -177,30 +177,41 @@ public class Pickup : MonoBehaviour
         {
             if (!table.GetComponent<InfoTable>().hasObject)
             {
-                canPickUpFood = false;
-                Transform t = table.GetComponent<InfoTable>().point;
-                table.GetComponent<InfoTable>().obj = objectHolded;
-                table.GetComponent<InfoTable>().hasObject = true;
+                Colocar(objectHolded); 
+            }
+            else if (table.GetComponent<InfoTable>().obj.name.Contains("plato") && (objectHolded.name.Contains("olla") || objectHolded.name.Contains("sarten")))
+            {
+                Debug.Log("Estoy aqui");
+                if (objectHolded.GetComponent<Olla>().alimentoTerminado)
+                {
+                    //Instanciar plato de sopa que hay en la mesa
+                    GameObject plato = table.GetComponent<InfoTable>().obj;
+                    GameObject newPlato; 
+                    string alimento = objectHolded.GetComponent<Olla>().tipoAlimento;
+                    string tipoPlato;
+                    if (alimento == "tomate") tipoPlato = "sopa_tomate";
+                    else if (alimento == "cebolla") tipoPlato = "sopa_cebolla";
+                    else tipoPlato = "sopa_champiñon";
+                    newPlato = plato.GetComponent<Plato>().EmplatarPlato(tipoPlato);
+                    Destroy(plato);
+                    Colocar(newPlato); 
 
-                holdingObject = false;
-                objectHolded.transform.parent = t;
-                objectHolded.transform.position = t.position;
-                
-                objectHolded.GetComponent<Rigidbody>().useGravity = true;
-                objectHolded.GetComponent<Rigidbody>().isKinematic = false;
-                Physics.IgnoreCollision(player.gameObject.GetComponent<Collider>(), objectHolded.GetComponent<Collider>(), false);
-                ResetCapsuleCollider();
+                    //Cambiamos la olla llena por una vacia
+                    GameObject newOlla = objectHolded.GetComponent<Olla>().VaciarOlla(boxHolder);
+                    Destroy(objectHolded);
+                    CogerObjeto(newOlla);
+                }
             }
         }
     }
 
-    void PickUpFromTable()
+    void CogerObjetoDeLaMesa()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
             if (table.GetComponent<InfoTable>().hasObject)
             {
-                if (table.name.Contains("cortar")) {
+                if (table.name.Contains("cortar")) {  //Recoge alimento de la tabla y si esta cortado desactiva la imagen
                     table.GetComponent<CuttingTable>().img.enabled=false; 
                 }
 
@@ -289,5 +300,22 @@ public class Pickup : MonoBehaviour
         {
             CogerObjeto(table.GetComponent<Fogon>().CogerUtensilioCocina());
         }
+    }
+
+    void Colocar(GameObject o)
+    {
+        canPickUpFood = false;
+        Transform t = table.GetComponent<InfoTable>().point;
+        table.GetComponent<InfoTable>().obj = o;
+        table.GetComponent<InfoTable>().hasObject = true;
+
+        holdingObject = false;
+        o.transform.parent = t;
+        o.transform.position = t.position;
+
+        o.GetComponent<Rigidbody>().useGravity = true;
+        o.GetComponent<Rigidbody>().isKinematic = false;
+        Physics.IgnoreCollision(player.gameObject.GetComponent<Collider>(), o.GetComponent<Collider>(), false);
+        ResetCapsuleCollider();
     }
 }

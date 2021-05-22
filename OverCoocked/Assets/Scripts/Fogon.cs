@@ -131,7 +131,7 @@ public class Fogon : MonoBehaviour
     {
         //Coge el utensilio del fogon si este tiene
         time = 0;
-        obj.GetComponent<Olla>().alimentoTerminado = false;
+        //obj.GetComponent<Olla>().alimentoTerminado = false;
         tieneObjecto = false; 
         cocinado = false;
         warning = false;
@@ -194,7 +194,8 @@ public class Fogon : MonoBehaviour
 
     void ApagarFogon()
     {
-        cocinado = false; 
+        cocinado = false;
+        warning = false; 
         humoParticulas.gameObject.SetActive(false);
         statusBar.AcabaAccion();
         statusBar.hasFinished = false; 
