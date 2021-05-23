@@ -8,7 +8,9 @@ public class Fogon : MonoBehaviour
     public GameObject obj;
     public bool tieneObjecto;
     public bool tipoOlla;
-    public Transform posiconObj;
+
+    public Transform posicionOlla;
+    public Transform posicionSarten; 
 
     public bool on; 
 
@@ -35,7 +37,6 @@ public class Fogon : MonoBehaviour
         cocinado = false;
         quemando = false;
         warning = false;
-        tipoOlla = true; 
 
         peligro.enabled = false;
         statusBar.SetMax(15);
@@ -54,7 +55,14 @@ public class Fogon : MonoBehaviour
     {
         if (statusBar.hasFinished && !cocinado && !quemando && tieneObjecto)
         {
-            obj.GetComponent<Olla>().alimentoTerminado = true; 
+            if (tipoOlla) obj.GetComponent<Olla>().alimentoTerminado = true;
+            else
+            {
+                GameObject newObject = obj.GetComponent<Sarten>().AlimentoHecho(posicionSarten);
+                Destroy(obj);
+                obj = newObject;
+                obj.GetComponent<Sarten>().alimentoTerminado = true;
+            }
             acabado.enabled = true;
             cocinado = true;
             tiempoQuemado = 0;
@@ -92,6 +100,7 @@ public class Fogon : MonoBehaviour
     { 
         if (tieneObjecto)
         {
+            Debug.Log("Estoy aqui");
             if (tipoOlla)
             {
                 if (alim.name.Contains("tomate_cortado") || alim.name.Contains("cebolla_cortada") || alim.name.Contains("champiñon_cortado"))
@@ -102,7 +111,7 @@ public class Fogon : MonoBehaviour
                         humoParticulas.gameObject.SetActive(true);
                         cocinado = false; 
                         statusBar.Cut();
-                        GameObject newObject = obj.GetComponent<Olla>().AñadirAlimentoOlla(alim, posiconObj);
+                        GameObject newObject = obj.GetComponent<Olla>().AñadirAlimentoOlla(alim, posicionOlla);
                         Destroy(obj);
                         obj = newObject;
                         return true;
@@ -110,18 +119,27 @@ public class Fogon : MonoBehaviour
                     else if (obj.GetComponent<Olla>().numAlim <= 2 && alim.name.Contains(obj.GetComponent<Olla>().tipoAlimento))
                     {
                         statusBar.time = statusBar.time - 6;
-                        GameObject newObject = obj.GetComponent<Olla>().AñadirAlimento(alim, posiconObj);
+                        GameObject newObject = obj.GetComponent<Olla>().AñadirAlimento(alim, posicionOlla);
                         Destroy(obj);
                         obj = newObject;
                         return true;
                     }
 
                 }
-
             }
-            else
+            else //Tipo sarten
             {
-                Debug.Log("Es sarten");
+                Debug.Log("Estoy aqui"); 
+                if (alim.name.Contains("chuleta_cortada"))
+                {
+                    humoParticulas.gameObject.SetActive(true);
+                    cocinado = false;
+                    statusBar.Cut();
+                    GameObject newObject = obj.GetComponent<Sarten>().AñadirAlimento(alim, posicionSarten);
+                    Destroy(obj);
+                    obj = newObject;
+                    return true;
+                }
             }
         }
         return false; 
@@ -132,9 +150,13 @@ public class Fogon : MonoBehaviour
         //Coge el utensilio del fogon si este tiene
         time = 0;
         //obj.GetComponent<Olla>().alimentoTerminado = false;
-        tieneObjecto = false; 
+        tieneObjecto = false;
+        tipoOlla = false; 
         cocinado = false;
         warning = false;
+
+        obj.GetComponent<BoxCollider>().enabled = true;
+
 
         //Desactiva las imagenes de información del fogon
         ApagarFogon(); 
@@ -145,24 +167,51 @@ public class Fogon : MonoBehaviour
     public void ColocarUtensilioCocina(GameObject utensilio)
     {
         /* Coloca el utensilio que ha cogido anteriormente en el fogon*/
-
         tieneObjecto = true;
-        obj = utensilio; 
-        utensilio.transform.parent = posiconObj;
-        utensilio.transform.position = posiconObj.position;
+        obj = utensilio;
+        utensilio.GetComponent<Rigidbody>().isKinematic = true;
+        
 
-        if (utensilio.GetComponent<Olla>().tieneAlimento)
+        if (utensilio.name.Contains("olla"))
         {
-            //Empieza de nuevo la accion de cocinar
-            humoParticulas.gameObject.SetActive(true);
-            statusBar.Cut();
+            tipoOlla = true; 
+            utensilio.transform.parent = posicionOlla;
+            utensilio.transform.position = posicionOlla.position;
+            utensilio.transform.localRotation = Quaternion.Euler(new Vector3(0f, 90f, 0f));
+
+
+            if (utensilio.GetComponent<Olla>().tieneAlimento)
+            {
+                utensilio.GetComponent<BoxCollider>().enabled = false;
+                //Empieza de nuevo la accion de cocinar
+                humoParticulas.gameObject.SetActive(true);
+                statusBar.Cut();
+            }
         }
+        else
+        {
+            tipoOlla = false; 
+            utensilio.transform.parent = posicionSarten;
+            utensilio.transform.position = posicionSarten.position;
+            utensilio.transform.rotation =posicionSarten.rotation;
+
+            if (utensilio.GetComponent<Sarten>().tieneAlimento)
+            {
+                utensilio.GetComponent<BoxCollider>().enabled = false;
+                //Empieza de nuevo la accion de cocinar
+                humoParticulas.gameObject.SetActive(true);
+                statusBar.Cut();
+            }
+        }
+       
+
+        
 
     }
 
     public string AñadirComidaPlato()
     {
-        GameObject newOlla;
+        GameObject newUtensilio;
         string tipoPlato; 
         if (tipoOlla)
         {
@@ -172,15 +221,19 @@ public class Fogon : MonoBehaviour
             else if (alimento == "cebolla") tipoPlato = "sopa_cebolla";
             else tipoPlato = "sopa_champiñon"; 
 
-            newOlla = obj.GetComponent<Olla>().VaciarOlla(posiconObj);
-            Destroy(obj);
-            obj = newOlla; 
+            newUtensilio = obj.GetComponent<Olla>().VaciarOlla(posicionOlla);
+            
         }
         else
         {
             tipoPlato = "carne";
+            newUtensilio = obj.GetComponent<Sarten>().VaciarSarten(posicionSarten);
         }
 
+        Destroy(obj);
+        obj = newUtensilio;
+        obj.GetComponent<BoxCollider>().enabled = false;
+        obj.GetComponent<Rigidbody>().isKinematic = true;
         ApagarFogon(); 
         return tipoPlato; 
     }

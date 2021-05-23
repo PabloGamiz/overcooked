@@ -179,28 +179,10 @@ public class Pickup : MonoBehaviour
             {
                 Colocar(objectHolded); 
             }
-            else if (table.GetComponent<InfoTable>().obj.name.Contains("plato") && (objectHolded.name.Contains("olla") || objectHolded.name.Contains("sarten")))
+            else if (table.GetComponent<InfoTable>().obj.name.Contains("plato"))
             {
-                Debug.Log("Estoy aqui");
-                if (objectHolded.GetComponent<Olla>().alimentoTerminado)
-                {
-                    //Instanciar plato de sopa que hay en la mesa
-                    GameObject plato = table.GetComponent<InfoTable>().obj;
-                    GameObject newPlato; 
-                    string alimento = objectHolded.GetComponent<Olla>().tipoAlimento;
-                    string tipoPlato;
-                    if (alimento == "tomate") tipoPlato = "sopa_tomate";
-                    else if (alimento == "cebolla") tipoPlato = "sopa_cebolla";
-                    else tipoPlato = "sopa_champiñon";
-                    newPlato = plato.GetComponent<Plato>().EmplatarPlato(tipoPlato);
-                    Destroy(plato);
-                    Colocar(newPlato); 
-
-                    //Cambiamos la olla llena por una vacia
-                    GameObject newOlla = objectHolded.GetComponent<Olla>().VaciarOlla(boxHolder);
-                    Destroy(objectHolded);
-                    CogerObjeto(newOlla);
-                }
+                
+                PrepararPlato(); 
             }
         }
     }
@@ -282,11 +264,15 @@ public class Pickup : MonoBehaviour
             }
             else if (objectHolded.name.Contains("plato"))
             {
-                Debug.Log("Estoy aqui");
+                //Debug.Log("Estoy aqui");
                 if (table.GetComponent<Fogon>().cocinado) // Coge el plato ya esta listo
                 {
                     string tipoPlato = table.GetComponent<Fogon>().AñadirComidaPlato();
-                    GameObject platoComida = objectHolded.GetComponent<Plato>().EmplatarPlato(tipoPlato);
+                    GameObject platoComida;
+
+                    if (table.GetComponent<Fogon>().tipoOlla) platoComida = objectHolded.GetComponent<Plato>().EmplatarPlatoSopa(tipoPlato);
+                    else platoComida = objectHolded.GetComponent<Plato>().EmplatarPlatoNormal(tipoPlato);
+                    
                     Destroy(objectHolded);
                     CogerObjeto(platoComida); 
                 }
@@ -317,5 +303,68 @@ public class Pickup : MonoBehaviour
         o.GetComponent<Rigidbody>().isKinematic = false;
         Physics.IgnoreCollision(player.gameObject.GetComponent<Collider>(), o.GetComponent<Collider>(), false);
         ResetCapsuleCollider();
+    }
+
+
+    void PrepararPlato()
+    {
+        if (objectHolded.name.Contains("olla") && objectHolded.GetComponent<Olla>().alimentoTerminado) // Preparar plato tipo sopa
+        {
+            //Instanciar plato de sopa que hay en la mesa
+            PrepararSopa(); 
+
+            //Cambiamos la olla llena por una vacia
+            GameObject newOlla = objectHolded.GetComponent<Olla>().VaciarOlla(boxHolder);
+            Destroy(objectHolded);
+            CogerObjeto(newOlla);
+        }
+        else if ((objectHolded.name.Contains("sarten") && objectHolded.GetComponent<Sarten>().alimentoTerminado) || (objectHolded.name.Contains("objAlimento") && objectHolded.name.Contains("cortado") && !objectHolded.name.Contains("champiñon")))
+        {
+            Debug.Log("Quiero estar aqui"); 
+            PrepararPlatoNormal(); 
+        }
+
+    }
+
+    void PrepararSopa()
+    {
+        GameObject plato = table.GetComponent<InfoTable>().obj;
+        GameObject newPlato;
+        string alimento = objectHolded.GetComponent<Olla>().tipoAlimento;
+        string tipoPlato;
+        if (alimento == "tomate") tipoPlato = "sopa_tomate";
+        else if (alimento == "cebolla") tipoPlato = "sopa_cebolla";
+        else tipoPlato = "sopa_champiñon";
+        newPlato = plato.GetComponent<Plato>().EmplatarPlatoSopa(tipoPlato);
+        Destroy(plato);
+        Colocar(newPlato);
+    }
+
+    void PrepararPlatoNormal()
+    {
+        GameObject plato = table.GetComponent<InfoTable>().obj;
+        GameObject newPlato;
+        string name = objectHolded.name;
+        string tipoAlimento;
+        if (name.Contains("tomate")) tipoAlimento = "tomate";
+        else if (name.Contains("lechuga")) tipoAlimento = "lechuga";
+        else if (name.Contains("pan")) tipoAlimento = "pan";
+        else tipoAlimento = "carne"; 
+
+        if (!plato.name.Contains(tipoAlimento)){
+
+            newPlato = plato.GetComponent<Plato>().EmplatarPlatoNormal(tipoAlimento);
+            Destroy(plato);
+            Colocar(newPlato);
+            holdingObject = false;
+            Destroy(objectHolded);
+            if (name.Contains("sarten"))
+            {
+                GameObject newSarten = objectHolded.GetComponent<Sarten>().VaciarSarten(boxHolder);
+                CogerObjeto(newSarten);
+            }
+            
+        }
+        
     }
 }
