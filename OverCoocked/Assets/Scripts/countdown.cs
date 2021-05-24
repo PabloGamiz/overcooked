@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Countdown : MonoBehaviour
 {
+    List<string> recetas;
     /*public GameObject finish;
     public GameObject countdown;
     public int seconds = 150;
@@ -14,6 +15,8 @@ public class Countdown : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        recetas = new List<string>();
+        Random rm = new Random();
         textDisplay.GetComponent<Text>().text = "2:30";
     }
 
@@ -38,7 +41,7 @@ public class Countdown : MonoBehaviour
         }
     }
 
-    IEnumerator InitialTexts()
+    void InitialTexts()
     {
         yield return new WaitForSeconds(3);
         escena.enable = false;
@@ -63,4 +66,30 @@ public class Countdown : MonoBehaviour
             textDisplay.GetComponent<Text>().text = d + ":0" + r;
         takeAway = false;    
     }*/
+
+    void escojerRecetas()
+    {
+        int n = rm.Next(1, 9);
+        if (n >=1 && n<=3)
+        {
+            recetas.Add("ensalada-l");
+        }
+        else if (n >= 4 && n <= 6)
+        {
+            recetas.Add("ensalada-lt");
+        }
+        else
+        {
+            recetas.Add("sopa-t");
+        }
+    }
+
+    void generarRecetas()
+    {
+
+        for (int i = 0; i < 5; ++i)
+        {
+            //crear quad con la imagen del string de la posicion i como textura
+        }
+    }
 }
