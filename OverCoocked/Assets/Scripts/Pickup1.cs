@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pickup : MonoBehaviour
+public class Pickup1 : MonoBehaviour
 {
     private Animator anim;
     public Transform grabDetect;

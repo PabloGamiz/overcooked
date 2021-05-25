@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveChef : MonoBehaviour
+public class MoveChef1 : MonoBehaviour
 {
     private Animator anim; 
 

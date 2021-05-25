@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3356218271869854066}
   - component: {fileID: 8654220527029989367}
   m_Layer: 0
-  m_Name: objAlimento_cebolla_cortada
+  m_Name: objAlimento_cebolla_cortado
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

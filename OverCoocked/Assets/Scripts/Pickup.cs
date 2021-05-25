@@ -308,7 +308,7 @@ public class Pickup : MonoBehaviour
 
     void PrepararPlato()
     {
-        if (objectHolded.name.Contains("olla") && objectHolded.GetComponent<Olla>().alimentoTerminado) // Preparar plato tipo sopa
+        if (objectHolded.name.Contains("olla") && !objectHolded.name.Contains("objAlimento")  && objectHolded.GetComponent<Olla>().alimentoTerminado) // Preparar plato tipo sopa
         {
             //Instanciar plato de sopa que hay en la mesa
             PrepararSopa(); 
@@ -346,12 +346,17 @@ public class Pickup : MonoBehaviour
         GameObject newPlato;
         string name = objectHolded.name;
         string tipoAlimento;
+
+        //Escogemos que tipo de alimento estamos poniendo en el plato
         if (name.Contains("tomate")) tipoAlimento = "tomate";
         else if (name.Contains("lechuga")) tipoAlimento = "lechuga";
         else if (name.Contains("pan")) tipoAlimento = "pan";
+        else if (name.Contains("pepinillo")) tipoAlimento = "pepinillo";
+        else if (name.Contains("cebolla")) tipoAlimento = "cebolla";
         else tipoAlimento = "carne"; 
 
-        if (!plato.name.Contains(tipoAlimento)){
+        if (!plato.name.Contains(tipoAlimento) && !plato.name.Contains("sopa") && PuedeColocarAlimento(tipoAlimento,plato.name))
+        {
 
             newPlato = plato.GetComponent<Plato>().EmplatarPlatoNormal(tipoAlimento);
             Destroy(plato);
@@ -366,5 +371,23 @@ public class Pickup : MonoBehaviour
             
         }
         
+    }
+
+    bool PuedeColocarAlimento(string tipoAlimento, string plato)
+    {
+        return  (tipoAlimento == "pepinillo" && !plato.Contains("lechuga") && !plato.Contains("tomate")) ||
+
+                ((tipoAlimento == "lechuga" || tipoAlimento == "tomate") && !plato.Contains("pepinillo") &&
+                ((plato.Contains("cebolla") && !plato.Contains("pan") && !plato.Contains("ham")) ||
+                ((!plato.Contains("cebolla") && (plato.Contains("pan") || plato.Contains("ham")))) ||
+                (plato.Contains("tomate") || plato.Contains("lechuga")))) ||
+
+                (tipoAlimento == "cebolla" &&
+                (((plato.Contains("lechuga") || plato.Contains("tomate")) && !plato.Contains("pan") && !plato.Contains("ham")) || (!plato.Contains("lechuga") && !plato.Contains("tomate")))) ||
+
+                ((tipoAlimento == "pan" || tipoAlimento == "carne") &&
+                (((plato.Contains("lechuga") || plato.Contains("tomate")) && !plato.Contains("cebolla")) || (!plato.Contains("lechuga") && !plato.Contains("tomate") && plato.Contains("cebolla")) || plato.Contains("pepinillo") || plato.Contains("ham") || plato.Contains("pan"))) ||
+
+                (!plato.Contains("tomate") && !plato.Contains("lechuga") && !plato.Contains("cebolla") && !plato.Contains("pepinillo") && !plato.Contains("ham") && !plato.Contains("pan")); 
     }
 }

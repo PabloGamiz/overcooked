@@ -832,6 +832,18 @@ MonoBehaviour:
   prefab_p_ham_l: {fileID: 8129531376163923165, guid: 3e9e180f0ad64564e8c99838f4e4c7d9, type: 3}
   prefab_p_t_l: {fileID: 8129531376163923165, guid: d80ec967bb776a548bd5159e98278c30, type: 3}
   prefab_p_ham_t_l: {fileID: 8129531376163923165, guid: 04137007df0b2ce4c95f6114412481a9, type: 3}
+  prefab_c: {fileID: 0}
+  prefab_pep: {fileID: 0}
+  prefab_c_pep: {fileID: 0}
+  prefab_l_c: {fileID: 8129531376163923165, guid: ce82ff0fded043b43bb1b8a30bac6e1a, type: 3}
+  prefab_t_c: {fileID: 0}
+  prefab_l_t_c: {fileID: 0}
+  prefab_ham_pep: {fileID: 0}
+  prefab_ham_c: {fileID: 0}
+  prefab_ham_pep_c: {fileID: 0}
+  prefab_p_ham_c: {fileID: 0}
+  prefab_p_ham_pep: {fileID: 0}
+  prefab_p_ham_c_pep: {fileID: 0}
   tieneAlimento: 0
 --- !u!1 &8773720444820523797
 GameObject:

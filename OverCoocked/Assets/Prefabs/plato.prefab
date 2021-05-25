@@ -247,13 +247,25 @@ MonoBehaviour:
   prefab_p: {fileID: 8129531376163923165, guid: 0178e324d99be6c489a88961550837d3, type: 3}
   prefab_ham_t: {fileID: 8129531376163923165, guid: a4bf30df846302049b9acabb2d1c60d3, type: 3}
   prefab_ham_l: {fileID: 8129531376163923165, guid: eefee455af7380a4daa7ad8b929354a8, type: 3}
-  prefab_ham_t_l: {fileID: 0}
+  prefab_ham_t_l: {fileID: 8129531376163923165, guid: de2a30c575b8f2b46998365b5db0ab4c, type: 3}
   prefab_t_l: {fileID: 8129531376163923165, guid: 8f2f46138cb6e3d43b1c0eb123622d78, type: 3}
   prefab_p_t: {fileID: 8129531376163923165, guid: bb120c60a415b0844a24e4170964ab22, type: 3}
   prefab_p_l: {fileID: 8129531376163923165, guid: 3e9e180f0ad64564e8c99838f4e4c7d9, type: 3}
-  prefab_p_ham: {fileID: 0}
-  prefab_p_ham_t: {fileID: 0}
-  prefab_p_ham_l: {fileID: 0}
+  prefab_p_ham: {fileID: 8129531376163923165, guid: d933993f3c23d674abb1026b002cbc8d, type: 3}
+  prefab_p_ham_t: {fileID: 8129531376163923165, guid: 608308f80ac5f974dbf08c5375096a9f, type: 3}
+  prefab_p_ham_l: {fileID: 8129531376163923165, guid: 3e9e180f0ad64564e8c99838f4e4c7d9, type: 3}
   prefab_p_t_l: {fileID: 8129531376163923165, guid: d80ec967bb776a548bd5159e98278c30, type: 3}
-  prefab_p_ham_t_l: {fileID: 0}
+  prefab_p_ham_t_l: {fileID: 8129531376163923165, guid: 04137007df0b2ce4c95f6114412481a9, type: 3}
+  prefab_c: {fileID: 8129531376163923165, guid: 26b5db5419690ea45be30f7b444620c0, type: 3}
+  prefab_pep: {fileID: 8129531376163923165, guid: fdfedb48353e1c44082ba54ca1532ef7, type: 3}
+  prefab_c_pep: {fileID: 0}
+  prefab_l_c: {fileID: 0}
+  prefab_t_c: {fileID: 0}
+  prefab_l_t_c: {fileID: 0}
+  prefab_ham_pep: {fileID: 0}
+  prefab_ham_c: {fileID: 0}
+  prefab_ham_pep_c: {fileID: 0}
+  prefab_p_ham_c: {fileID: 0}
+  prefab_p_ham_pep: {fileID: 0}
+  prefab_p_ham_c_pep: {fileID: 0}
   tieneAlimento: 0
