@@ -20,7 +20,9 @@ public class Pickup : MonoBehaviour
     bool canGrabPlate;
     bool canPickUpFood; 
     bool mesaCortar;
-    bool fogon; 
+    bool puedeEntregar; 
+    bool fogon;
+    bool objExtintor; 
     public GameObject table;
     GameObject food;
 
@@ -70,37 +72,55 @@ public class Pickup : MonoBehaviour
         else if (((!holdingObject && canPickUpFood) ||( !can && !canGrabFood && !canGrabPlate))) PickUpThings();
 
 
+        if (objExtintor)
+        {
+            AccionesExtintor(); 
+        }
+
     }
 
     void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.name.Contains("olla") || collision.gameObject.name.Contains("sarten") || collision.gameObject.name.Contains("objAlimento") || (collision.gameObject.name.Contains("plato") && !collision.gameObject.name.Contains("mesa")))
+        Debug.Log("HE ENTRADO");
+        if (collision.gameObject.name.Contains("olla") || collision.gameObject.name.Contains("sarten") || collision.gameObject.name.Contains("objAlimento") || collision.gameObject.name.Contains("extintor") || (collision.gameObject.name.Contains("plato") && !collision.gameObject.name.Contains("mesa")))
         {
-            food = collision.gameObject; 
-            canPickUpFood = true; 
+            food = collision.gameObject;
+            canPickUpFood = true;
+            puedeEntregar = false;
         }
         else if (collision.gameObject.name.Contains("mesa") && !collision.gameObject.name.Contains("platos"))
         {
             can = true;
             table = collision.gameObject;
+            puedeEntregar = false;
             if (collision.gameObject.name.Contains("mesa cortar")) mesaCortar = true;
 
+        }
+        else if (collision.gameObject.name.Contains("entregar"))
+        {
+            can = true;
+            puedeEntregar = true; 
+            table = collision.gameObject;
         }
         else if (collision.gameObject.name.Contains("alimentos"))
         {
             canGrabFood = true;
             table = collision.gameObject;
+            puedeEntregar = false;
         }
         else if (collision.gameObject.name.Contains("fogon"))
         {
             fogon = true;
             table = collision.gameObject;
+            puedeEntregar = false;
         }
         else if (collision.gameObject.name.Contains("platos"))
         {
             canGrabPlate = true;
             table = collision.gameObject;
+            puedeEntregar = false;
         }
+        
     }
 
     void OnTriggerExit(Collider collision)
@@ -113,6 +133,8 @@ public class Pickup : MonoBehaviour
         can = false;
         canGrabFood = false;
         canGrabPlate = false;
+        puedeEntregar = false;
+        Debug.Log("HE SALIDO"); 
         fogon = false;
     }
 
@@ -125,6 +147,10 @@ public class Pickup : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Q))
                 {
+                    if (food.name.Contains("extintor"))
+                    {
+                        objExtintor = true; 
+                    }
                     GameObject obj = food; 
                     CogerObjeto(obj);
                 }
@@ -135,6 +161,7 @@ public class Pickup : MonoBehaviour
                 {
 
                     holdingObject = false;
+                    objExtintor = false;
                     objectHolded.transform.parent = null;
                     objectHolded.GetComponent<Rigidbody>().useGravity = true;
                     objectHolded.GetComponent<Rigidbody>().isKinematic = false;
@@ -175,15 +202,31 @@ public class Pickup : MonoBehaviour
         /* Colocar objecto en la mesa */
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            if (!table.GetComponent<InfoTable>().hasObject)
+            Debug.Log(puedeEntregar);
+            if (!puedeEntregar)
             {
-                Colocar(objectHolded); 
+                if (!table.GetComponent<InfoTable>().hasObject)
+                {
+                    Colocar(objectHolded);
+                }
+                else if (table.GetComponent<InfoTable>().obj.name.Contains("plato"))
+                {
+
+                    PrepararPlato();
+                }
             }
-            else if (table.GetComponent<InfoTable>().obj.name.Contains("plato"))
+            else if (puedeEntregar && objectHolded.name.Contains("plato"))
             {
-                
-                PrepararPlato(); 
+                if (!table.GetComponent<MesaEntrega>().tieneObjeto)
+                {
+                    holdingObject = false;
+                    Physics.IgnoreCollision(player.gameObject.GetComponent<Collider>(), objectHolded.GetComponent<Collider>(), false);
+                    ResetCapsuleCollider();
+                    table.GetComponent<MesaEntrega>().EntregarPlato(objectHolded);
+                }
+
             }
+
         }
     }
 
@@ -191,16 +234,26 @@ public class Pickup : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            if (table.GetComponent<InfoTable>().hasObject)
+            if (!puedeEntregar)
             {
-                if (table.name.Contains("cortar")) {  //Recoge alimento de la tabla y si esta cortado desactiva la imagen
-                    table.GetComponent<CuttingTable>().img.enabled=false; 
-                }
+                if (table.GetComponent<InfoTable>().hasObject)
+                {
+                    if (table.name.Contains("cortar"))
+                    {  //Recoge alimento de la tabla y si esta cortado desactiva la imagen
+                        table.GetComponent<CuttingTable>().img.enabled = false;
+                    }
 
-                table.GetComponent<InfoTable>().hasObject = false; 
-                CogerObjeto(table.GetComponent<InfoTable>().obj); 
+                    table.GetComponent<InfoTable>().hasObject = false;
+                    CogerObjeto(table.GetComponent<InfoTable>().obj);
+                }
             }
-           
+            else if (puedeEntregar && objectHolded.name.Contains("plato"))
+            {
+                if(table.GetComponent<MesaEntrega>().tieneObjeto)
+                    CogerObjeto(table.GetComponent<MesaEntrega>().CogerPlato());
+            }
+
+
         }
         else if (Input.GetKeyDown(KeyCode.E))
         {
@@ -389,5 +442,14 @@ public class Pickup : MonoBehaviour
                 (((plato.Contains("lechuga") || plato.Contains("tomate")) && !plato.Contains("cebolla")) || (!plato.Contains("lechuga") && !plato.Contains("tomate") && plato.Contains("cebolla")) || plato.Contains("pepinillo") || plato.Contains("ham") || plato.Contains("pan"))) ||
 
                 (!plato.Contains("tomate") && !plato.Contains("lechuga") && !plato.Contains("cebolla") && !plato.Contains("pepinillo") && !plato.Contains("ham") && !plato.Contains("pan")); 
+    }
+
+
+    void AccionesExtintor()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            objectHolded.GetComponent<Extintor>().EncenderApagarExtintor(); 
+        }
     }
 }

@@ -25,7 +25,7 @@ public class Fogon : MonoBehaviour
     public MaskableGraphic peligro;
 
     public bool cocinado;
-    bool quemando;
+    public bool quemando;
     bool warning; 
     float tiempoQuemado;
     
@@ -255,5 +255,25 @@ public class Fogon : MonoBehaviour
         acabado.enabled = false;
         peligro.enabled = false;
         CancelInvoke("ToggleState");
+    }
+
+    public void ApagarFuego()
+    {
+        quemando = false;
+        GameObject newUtensilio;
+        
+        if (tipoOlla)
+        {
+            newUtensilio = obj.GetComponent<Olla>().VaciarOlla(posicionOlla);
+        }
+        else
+        {
+            newUtensilio = obj.GetComponent<Sarten>().VaciarSarten(posicionSarten);
+        }
+        fuegoParticulas.gameObject.SetActive(false);
+        Destroy(obj);
+        obj = newUtensilio;
+        ApagarFogon(); 
+
     }
 }
