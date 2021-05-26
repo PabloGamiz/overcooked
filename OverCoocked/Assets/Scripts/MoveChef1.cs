@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class MoveChef1 : MonoBehaviour
 {
-    private Animator anim; 
+    public Animator anim; 
 
     public float speed = 7.0f;
     public float rotationSpeed= 1100.0f;
@@ -31,11 +32,17 @@ public class MoveChef1 : MonoBehaviour
 
         if (can_move)
         {
-            inputVector = new Vector3(horizontalInput * speed, rb.velocity.y, verticalInput * speed);
-            transform.LookAt(transform.position + new Vector3(inputVector.x, 0, inputVector.z));
-            anim.SetBool("Walking", true);
+            if (horizontalInput == 0 || verticalInput == 0)
+            {
+                anim.SetBool("Walking", false);
+            }
+            else
+            {
+                inputVector = new Vector3(horizontalInput * speed, rb.velocity.y, verticalInput * speed);
+                transform.LookAt(transform.position + new Vector3(inputVector.x, 0, inputVector.z));
+                anim.SetBool("Walking", true);
+            }
         }
-        else anim.SetBool("Walking", false);
     }
 
     void FixedUpdate()
@@ -43,4 +50,8 @@ public class MoveChef1 : MonoBehaviour
         rb.velocity = inputVector;
     }
 
+    public void update_anim (string s, bool b)
+    {
+        anim.SetBool(s, b);
+    }
 }

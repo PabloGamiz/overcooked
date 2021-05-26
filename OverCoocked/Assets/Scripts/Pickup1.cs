@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Pickup1 : MonoBehaviour
 {
-    private Animator anim;
     public Transform grabDetect;
     public Transform boxHolder;
     public GameObject player;
@@ -45,12 +44,14 @@ public class Pickup1 : MonoBehaviour
             if (holdingObject)
             {
                 ColocarObjeto();
-                anim.SetBool("Holding", false);
+                MoveChef1 mc = player.GetComponent<MoveChef1>();
+                mc.update_anim("Holding", false);
             }
             else
             {
                 CogerObjetoDeLaMesa();
-                anim.SetBool("Holding", true);
+                MoveChef1 mc = player.GetComponent<MoveChef1>();
+                mc.update_anim("Holding", true);
 
             }
 
@@ -60,7 +61,8 @@ public class Pickup1 : MonoBehaviour
             if (!holdingObject)
             {
                 GrabFood();
-                anim.SetBool("Holding", true);
+                MoveChef1 mc = player.GetComponent<MoveChef1>();
+                mc.update_anim("Holding", true);
             }
         }
         else if (canGrabPlate)
@@ -68,25 +70,29 @@ public class Pickup1 : MonoBehaviour
             if (!holdingObject)
             {
                 GrabPlate();
-                anim.SetBool("Holding", true);
+                MoveChef1 mc = player.GetComponent<MoveChef1>();
+                mc.update_anim("Holding", true);
             }
             else if (fogon)
             {
                 if (holdingObject)
                 {
                     AccionesFogon();
-                    anim.SetBool("Holding", false);
+                    MoveChef1 mc = player.GetComponent<MoveChef1>();
+                    mc.update_anim("Holding", false);
                 }
                 else
                 {
                     CogerUtensilioCocina();
-                    anim.SetBool("Holding", true);
+                    MoveChef1 mc = player.GetComponent<MoveChef1>();
+                    mc.update_anim("Holding", true);
                 }
             }
             else if (((!holdingObject && canPickUpFood) || (!can && !canGrabFood && !canGrabPlate)))
             {
                 PickUpThings();
-                anim.SetBool("Holding", true);
+                MoveChef1 mc = player.GetComponent<MoveChef1>();
+                mc.update_anim("Holding", true);
             }
         }
     }
@@ -375,12 +381,15 @@ public class Pickup1 : MonoBehaviour
             newPlato = plato.GetComponent<Plato>().EmplatarPlatoNormal(tipoAlimento);
             Destroy(plato);
             Colocar(newPlato);
+            MoveChef1 mc = player.GetComponent<MoveChef1>();
+            mc.update_anim("Holding", false);
             holdingObject = false;
             Destroy(objectHolded);
             if (name.Contains("sarten"))
             {
                 GameObject newSarten = objectHolded.GetComponent<Sarten>().VaciarSarten(boxHolder);
                 CogerObjeto(newSarten);
+                mc.update_anim("Holding", true);
             }
             
         }

@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Countdown : MonoBehaviour
 {
-    List<string> recetas;
-    /*public GameObject finish;
+    public List<int> recetas;
+    public GameObject Receta;
+    public GameObject finish;
     public GameObject countdown;
+    public GameObject ready;
+    public GameObject Escene1;
+    public GameObject go;
     public int seconds = 150;
     public bool takeAway = false;
     public bool initial = false;
@@ -15,14 +20,15 @@ public class Countdown : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        recetas = new List<string>();
-        Random rm = new Random();
-        textDisplay.GetComponent<Text>().text = "2:30";
+        Debug.Log("dentro de start");
+        recetas = new List<int>();
+
     }
 
     // Update is called once per frame
-    void Update()
+    IEnumerator Update()
     {
+        Debug.Log("dentro de update");
         if (initial == true)
         {
             StartCoroutine(InitialTexts());
@@ -34,23 +40,24 @@ public class Countdown : MonoBehaviour
         }
         else
         {
-            finish.enable = true;
             yield return new WaitForSeconds(5);
-            Application.LoadLevel("escena2");
+            SceneManager.LoadScene("Scenes/escena2");
 
         }
     }
 
-    void InitialTexts()
+    IEnumerator InitialTexts()
     {
+        Debug.Log("dentro de texto iniciales");
         yield return new WaitForSeconds(3);
-        escena.enable = false;
-        ready.enable = true;
+        Escene1.SetActive(false);
+        ready.SetActive(true);
         yield return new WaitForSeconds(2);
-        ready.enable = false;
-        go.enable = true;
+        ready.SetActive(false);
+        go.SetActive(true);
         yield return new WaitForSeconds(3);
-        go.enable = false;
+        go.SetActive(false);
+        Debug.Log("final de texto iniciales");
     }
 
     IEnumerator TimerTake()
@@ -61,35 +68,45 @@ public class Countdown : MonoBehaviour
         int d = seconds / 60;
         int r = seconds % 60;
         if (r > 9)
-            textDisplay.GetComponent<Text>().text = d + ":" + r;
+            countdown.GetComponent<Text>().text = d + ":" + r;
         else
-            textDisplay.GetComponent<Text>().text = d + ":0" + r;
+            countdown.GetComponent<Text>().text = d + ":0" + r;
         takeAway = false;    
-    }*/
+    }
 
     void escojerRecetas()
     {
-        int n = rm.Next(1, 9);
+        int n = Random.Range(1, 9);
         if (n >=1 && n<=3)
         {
-            recetas.Add("ensalada-l");
+            recetas.Add(1);
         }
         else if (n >= 4 && n <= 6)
         {
-            recetas.Add("ensalada-lt");
+            recetas.Add(2);
         }
         else
         {
-            recetas.Add("sopa-t");
+            recetas.Add(4);
         }
     }
 
-    void generarRecetas()
+    void crear_recetas(List<int> recetas)
     {
-
-        for (int i = 0; i < 5; ++i)
-        {
-            //crear quad con la imagen del string de la posicion i como textura
+        if (recetas.Count < 5 && recetas.Count != 0) {
+            for (int i = 0; i < recetas.Count; ++i)
+            {
+                GameObject obj = (GameObject)Instantiate(Receta, new Vector3(-5.5f + 2.75f * i, 14, -11.5f), Receta.transform.rotation);
+                obj.GetComponent<change_material>().cambiar_material(recetas[i]);
+            }
+        }
+        else if (recetas.Count != 0) {
+            for (int i = 0; i < 5; ++i)
+            {
+                GameObject obj = (GameObject)Instantiate(Receta, new Vector3(-5.5f + 2.75f * i, 14, -11.5f), Receta.transform.rotation);
+                obj.GetComponent<change_material>().cambiar_material(recetas[i]);
+            }
         }
     }
+
 }
