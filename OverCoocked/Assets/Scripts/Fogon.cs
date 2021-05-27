@@ -10,7 +10,13 @@ public class Fogon : MonoBehaviour
     public bool tipoOlla;
 
     public Transform posicionOlla;
-    public Transform posicionSarten; 
+    public Transform posicionSarten;
+
+    public AudioSource boiling;
+    public AudioSource freirAudio; 
+    public AudioSource alarmaIncendios;
+    public AudioSource fuegoAudio; 
+    public AudioSource avisoAcabadoAudio; 
 
     public bool on; 
 
@@ -55,17 +61,24 @@ public class Fogon : MonoBehaviour
     {
         if (statusBar.hasFinished && !cocinado && !quemando && tieneObjecto)
         {
-            if (tipoOlla) obj.GetComponent<Olla>().alimentoTerminado = true;
+            if (tipoOlla)
+            {
+                obj.GetComponent<Olla>().alimentoTerminado = true;
+                
+            }
             else
             {
+
                 GameObject newObject = obj.GetComponent<Sarten>().AlimentoHecho(posicionSarten);
                 Destroy(obj);
                 obj = newObject;
                 obj.GetComponent<Sarten>().alimentoTerminado = true;
             }
+            avisoAcabadoAudio.Play(); 
             acabado.enabled = true;
             cocinado = true;
             tiempoQuemado = 0;
+            time = 0; 
 
         }
 
@@ -90,6 +103,10 @@ public class Fogon : MonoBehaviour
                 peligro.enabled = false;
                 humoParticulas.gameObject.SetActive(false);
                 fuegoParticulas.gameObject.SetActive(true);
+                boiling.Stop();
+                freirAudio.Stop();
+                fuegoAudio.Play();
+                alarmaIncendios.Play(); 
             }
 
         }
@@ -108,6 +125,7 @@ public class Fogon : MonoBehaviour
 
                     if (obj.GetComponent<Olla>().numAlim == 0)
                     {
+                        boiling.Play();
                         humoParticulas.gameObject.SetActive(true);
                         cocinado = false; 
                         statusBar.Cut();
@@ -132,6 +150,7 @@ public class Fogon : MonoBehaviour
                 Debug.Log("Estoy aqui"); 
                 if (alim.name.Contains("chuleta_cortada"))
                 {
+                    freirAudio.Play(); 
                     humoParticulas.gameObject.SetActive(true);
                     cocinado = false;
                     statusBar.Cut();
@@ -154,7 +173,7 @@ public class Fogon : MonoBehaviour
         tipoOlla = false; 
         cocinado = false;
         warning = false;
-
+        boiling.Stop();
         obj.GetComponent<BoxCollider>().enabled = true;
 
 
@@ -185,7 +204,9 @@ public class Fogon : MonoBehaviour
                 utensilio.GetComponent<BoxCollider>().enabled = false;
                 //Empieza de nuevo la accion de cocinar
                 humoParticulas.gameObject.SetActive(true);
+                boiling.Play();
                 statusBar.Cut();
+                
             }
         }
         else
@@ -231,6 +252,8 @@ public class Fogon : MonoBehaviour
         }
 
         Destroy(obj);
+        boiling.Stop();
+        freirAudio.Stop();
         obj = newUtensilio;
         obj.GetComponent<BoxCollider>().enabled = false;
         obj.GetComponent<Rigidbody>().isKinematic = true;
@@ -254,6 +277,8 @@ public class Fogon : MonoBehaviour
         statusBar.hasFinished = false; 
         acabado.enabled = false;
         peligro.enabled = false;
+        freirAudio.Stop();
+        boiling.Stop(); 
         CancelInvoke("ToggleState");
     }
 
@@ -273,6 +298,8 @@ public class Fogon : MonoBehaviour
         fuegoParticulas.gameObject.SetActive(false);
         Destroy(obj);
         obj = newUtensilio;
+        alarmaIncendios.Stop();
+        fuegoAudio.Stop(); 
         ApagarFogon(); 
 
     }

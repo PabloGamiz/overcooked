@@ -10,6 +10,8 @@ public class GrabFood : MonoBehaviour
     public GameObject food;
     public bool hasFood;
 
+    public AudioSource audioAbrir;
+
     void Start()
     {
         hasFood = false;
@@ -18,6 +20,7 @@ public class GrabFood : MonoBehaviour
     public void GrabFoodFromBox()
     {
        food = (GameObject)Instantiate(prefab, point.position, point.rotation);
+       audioAbrir.Play();
        //food.transform.parent = point;
        hasFood = true; 
     }

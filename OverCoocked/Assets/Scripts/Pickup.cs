@@ -9,12 +9,16 @@ public class Pickup : MonoBehaviour
     public GameObject player;
     public GameObject objectHolded;
     public float rayDist;
-    public CapsuleCollider capCol; 
+    public CapsuleCollider capCol;
 
+    public AudioSource coger;
+    public AudioSource dejar;
+    
     //public GameObject tomato;
     //GameObject ObjectToPickUp;
 
     public bool holdingObject;
+    bool cortando; 
     bool can;
     bool canGrabFood;
     bool canGrabPlate;
@@ -32,93 +36,103 @@ public class Pickup : MonoBehaviour
         holdingObject = false; 
         canGrabPlate = false;
         fogon = false;
-        can = false; 
+        can = false;
+        cortando = false; 
 
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (can)
+        if (GetComponent<MoveChef>().can_move)
         {
-
-            if (holdingObject)
+            if (can)
             {
-                ColocarObjeto();
+
+                if (holdingObject)
+                {
+                    ColocarObjeto();
+                }
+                else
+                {
+                    CogerObjetoDeLaMesa();
+                }
+
             }
-            else
+            else if (canGrabFood)
             {
-                CogerObjetoDeLaMesa();
+                if (!holdingObject)
+                {
+                    GrabFood();
+                }
             }
-            
-        }
-        else if (canGrabFood)
-        {
-            if (!holdingObject)
+            else if (canGrabPlate)
             {
-                GrabFood(); 
+                if (!holdingObject) GrabPlate();
             }
-        }
-        else if (canGrabPlate)
-        {
-            if (!holdingObject) GrabPlate(); 
-        }
-        else if (fogon)
-        {
-            if (holdingObject) AccionesFogon();
-            else CogerUtensilioCocina(); 
-        }
-        else if (((!holdingObject && canPickUpFood) ||( !can && !canGrabFood && !canGrabPlate))) PickUpThings();
+            else if (fogon)
+            {
+                if (holdingObject) AccionesFogon();
+                else CogerUtensilioCocina();
+            }
+            else if (((!holdingObject && canPickUpFood) || (!can && !canGrabFood && !canGrabPlate))) PickUpThings();
 
 
-        if (objExtintor)
-        {
-            AccionesExtintor(); 
+            if (objExtintor)
+            {
+                AccionesExtintor();
+            }
         }
+
+
 
     }
 
-    void OnTriggerEnter(Collider collision)
+    void OnTriggerStay(Collider collision)
     {
-        Debug.Log("HE ENTRADO");
+        
         if (collision.gameObject.name.Contains("olla") || collision.gameObject.name.Contains("sarten") || collision.gameObject.name.Contains("objAlimento") || collision.gameObject.name.Contains("extintor") || (collision.gameObject.name.Contains("plato") && !collision.gameObject.name.Contains("mesa")))
         {
             food = collision.gameObject;
             canPickUpFood = true;
-            puedeEntregar = false;
+            //puedeEntregar = false;
         }
         else if (collision.gameObject.name.Contains("mesa") && !collision.gameObject.name.Contains("platos"))
         {
             can = true;
             table = collision.gameObject;
+            
             puedeEntregar = false;
             if (collision.gameObject.name.Contains("mesa cortar")) mesaCortar = true;
 
         }
         else if (collision.gameObject.name.Contains("entregar"))
         {
+            
             can = true;
             puedeEntregar = true; 
             table = collision.gameObject;
         }
         else if (collision.gameObject.name.Contains("alimentos"))
         {
+            can = false; 
             canGrabFood = true;
             table = collision.gameObject;
-            puedeEntregar = false;
+            //puedeEntregar = false;
         }
         else if (collision.gameObject.name.Contains("fogon"))
         {
+            can = false; 
             fogon = true;
             table = collision.gameObject;
-            puedeEntregar = false;
+            //puedeEntregar = false;
         }
         else if (collision.gameObject.name.Contains("platos"))
         {
             canGrabPlate = true;
+            can = false; 
             table = collision.gameObject;
-            puedeEntregar = false;
+            //puedeEntregar = false;
         }
         
     }
@@ -131,6 +145,7 @@ public class Pickup : MonoBehaviour
             table = null;
         }
         can = false;
+        mesaCortar = false; 
         canGrabFood = false;
         canGrabPlate = false;
         puedeEntregar = false;
@@ -159,12 +174,13 @@ public class Pickup : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Q))
                 {
-
+                    dejar.Play(); 
                     holdingObject = false;
                     objExtintor = false;
                     objectHolded.transform.parent = null;
                     objectHolded.GetComponent<Rigidbody>().useGravity = true;
                     objectHolded.GetComponent<Rigidbody>().isKinematic = false;
+                    objectHolded.GetComponent<Collider>().enabled = true;
                     Physics.IgnoreCollision(player.gameObject.GetComponent<Collider>(), objectHolded.GetComponent<Collider>(), false);
                     ResetCapsuleCollider();
                 }
@@ -186,14 +202,15 @@ public class Pickup : MonoBehaviour
 
         obj.transform.parent = boxHolder;
         obj.transform.localPosition = Vector3.zero;
-        //obj.transform.localRotation = Quaternion.Euler(Vector3.zero);
+        obj.transform.eulerAngles = this.transform.GetChild(0).eulerAngles; 
         obj.GetComponent<Rigidbody>().isKinematic = true;
         obj.GetComponent<Rigidbody>().useGravity = false;
- 
+
+        coger.Play(); 
         objectHolded = obj;
         Physics.IgnoreCollision(player.gameObject.GetComponent<Collider>(), obj.GetComponent<Collider>(), true);
-        capCol.height = 1.59f;
-        capCol.center = new Vector3(-0.016f, 0.546f, 0.2f);
+        /*capCol.height = 1.59f;
+        capCol.center = new Vector3(-0.016f, 0.546f, 0.2f);*/
     }
 
 
@@ -261,6 +278,7 @@ public class Pickup : MonoBehaviour
             {
                 if (table.GetComponent<InfoTable>().hasObject)
                 {
+                    cortando = true; 
                     table.GetComponent<CuttingTable>().obj = table.GetComponent<InfoTable>().obj;
                     table.GetComponent<CuttingTable>().Cut(); 
                 } 
@@ -271,8 +289,8 @@ public class Pickup : MonoBehaviour
 
     void ResetCapsuleCollider()
     {
-        capCol.height = 1.1f;
-        capCol.center = new Vector3(-0.016f, 0.546f, 0.005f);
+        /*capCol.height = 1.1f;
+        capCol.center = new Vector3(-0.016f, 0.546f, 0.005f);*/
     }
 
 
@@ -347,13 +365,16 @@ public class Pickup : MonoBehaviour
         Transform t = table.GetComponent<InfoTable>().point;
         table.GetComponent<InfoTable>().obj = o;
         table.GetComponent<InfoTable>().hasObject = true;
-
+        o.GetComponent<Rigidbody>().isKinematic = true;
+        o.GetComponent<Collider>().enabled = false; 
         holdingObject = false;
         o.transform.parent = t;
         o.transform.position = t.position;
+        o.transform.eulerAngles = t.GetChild(0).eulerAngles;
 
         o.GetComponent<Rigidbody>().useGravity = true;
-        o.GetComponent<Rigidbody>().isKinematic = false;
+        dejar.Play(); 
+        
         Physics.IgnoreCollision(player.gameObject.GetComponent<Collider>(), o.GetComponent<Collider>(), false);
         ResetCapsuleCollider();
     }

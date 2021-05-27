@@ -25,12 +25,10 @@ public class Extintor : MonoBehaviour
         {
             if (time < 2)
             {
-                Debug.Log("APAGANDO fuego");
                 time += Time.deltaTime;
             }
             else
             {
-                Debug.Log("EXTINGUIDO FUEGO");
                 puedoApagar = false;
                 fogon.GetComponent<Fogon>().ApagarFuego(); 
             }
@@ -56,6 +54,11 @@ public class Extintor : MonoBehaviour
                 fogon = collision.gameObject; 
             }
         }
+        else
+        {
+            //puedoApagar = false;
+            //time = 0;
+        }
 
     }
 
@@ -63,6 +66,7 @@ public class Extintor : MonoBehaviour
     {
 
         puedoApagar = false;
+        //time = 0; 
 
     }
 

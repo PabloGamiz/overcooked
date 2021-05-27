@@ -5,7 +5,7 @@ using UnityEngine;
 public class MoveChef : MonoBehaviour
 {
 
-    public float speed = 7.0f;
+    public float speed = 10.0f;
     public float rotationSpeed= 1100.0f;
     public bool can_move;
 
@@ -30,7 +30,7 @@ public class MoveChef : MonoBehaviour
         if (can_move)
         {
             inputVector = new Vector3(horizontalInput * speed, rb.velocity.y, verticalInput * speed);
-            transform.LookAt(transform.position + new Vector3(inputVector.x, 0, inputVector.z));
+            transform.LookAt(transform.position + new Vector3(inputVector.z, 0, -inputVector.x));
         }
     }
 

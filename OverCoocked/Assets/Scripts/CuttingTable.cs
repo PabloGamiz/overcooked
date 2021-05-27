@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class CuttingTable : MonoBehaviour
 {
     public bool hasObject;
@@ -22,6 +23,15 @@ public class CuttingTable : MonoBehaviour
     public Image img;
     int statusObject;
     float time;
+
+    public AudioSource cortarAudio;
+    public AudioSource avisoAudio;
+
+    public ParticleSystem ensaladaParticulas;
+    public ParticleSystem tomateParticulas;
+    public ParticleSystem cebollaParticulas;
+    public ParticleSystem champiñonParticulas;
+
 
 
     // Start is called before the first frame update
@@ -46,32 +56,32 @@ public class CuttingTable : MonoBehaviour
                 if (obj.name.Contains("tomate"))
                 {
                     Destroy(obj);
-                    new_obj = (GameObject)Instantiate(cutTomato_prefab, point.position, point.rotation);
+                    new_obj = (GameObject)Instantiate(cutTomato_prefab, point.position, cutTomato_prefab.transform.rotation);
                 }
                 else if (obj.name.Contains("cebolla"))
                 {
                     Destroy(obj);
-                    new_obj = (GameObject)Instantiate(cutOnion_prefab, point.position, point.rotation);
+                    new_obj = (GameObject)Instantiate(cutOnion_prefab, point.position, cutOnion_prefab.transform.rotation);
                 }
                 else if (obj.name.Contains("champiñon"))
                 {
                     Destroy(obj);
-                    new_obj = (GameObject)Instantiate(cutMushroom_prefab, point.position, point.rotation);
+                    new_obj = (GameObject)Instantiate(cutMushroom_prefab, point.position, cutMushroom_prefab.transform.rotation);
                 }
                 else if (obj.name.Contains("chuleta"))
                 {
                     Destroy(obj);
-                    new_obj = (GameObject)Instantiate(cutMeet_prefab, point.position, point.rotation);
+                    new_obj = (GameObject)Instantiate(cutMeet_prefab, point.position, cutMeet_prefab.transform.rotation);
                 }
                 else if (obj.name.Contains("lechuga"))
                 {
                     Destroy(obj);
-                    new_obj = (GameObject)Instantiate(cutLetucce_prefab, point.position, point.rotation);
+                    new_obj = (GameObject)Instantiate(cutLetucce_prefab, point.position, cutLetucce_prefab.transform.rotation);
                 }
                 else
                 {
                     Destroy(obj);
-                    new_obj = (GameObject)Instantiate(cutPickle_prefab, point.position, point.rotation);
+                    new_obj = (GameObject)Instantiate(cutPickle_prefab, point.position, cutPickle_prefab.transform.rotation);
                 }
 
                 gameObject.GetComponent<InfoTable>().obj = new_obj;
@@ -86,14 +96,42 @@ public class CuttingTable : MonoBehaviour
         player.transform.parent = positionPlayer;
         player.transform.position = positionPlayer.position;
         player.GetComponent<MoveChef>().can_move = false;
+        cortarAudio.Play();
+
+
+        if (obj.name.Contains("tomate"))
+        {
+            tomateParticulas.gameObject.SetActive(true); 
+        }
+        else if (obj.name.Contains("cebolla"))
+        {
+            cebollaParticulas.gameObject.SetActive(true); 
+        }
+        else if (obj.name.Contains("champiñon"))
+        {
+            champiñonParticulas.gameObject.SetActive(true);
+        }
+        else if (obj.name.Contains("lechuga"))
+        {
+            ensaladaParticulas.gameObject.SetActive(true);
+        }
+
+
         statusBar.Cut(); 
     }
 
     void FinishCuttingAction()
     {
+        cortarAudio.Stop();
+        avisoAudio.Play(); 
         img.enabled = true;
         player.transform.parent = null;
         player.GetComponent<MoveChef>().can_move = true;
+
+        tomateParticulas.gameObject.SetActive(false);
+        cebollaParticulas.gameObject.SetActive(false);
+        champiñonParticulas.gameObject.SetActive(false);
+        ensaladaParticulas.gameObject.SetActive(false);
     }
 
 

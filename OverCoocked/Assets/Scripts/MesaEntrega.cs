@@ -10,7 +10,9 @@ public class MesaEntrega : MonoBehaviour
 
     GameObject obj;
     public Transform puntoEntrega; 
-    public bool tieneObjeto; 
+    public bool tieneObjeto;
+
+    public AudioSource audioEntrega; 
 
     public Image correcto;
     public Image mal;
@@ -68,12 +70,14 @@ public class MesaEntrega : MonoBehaviour
 
         o.GetComponent<Rigidbody>().useGravity = true;
         o.GetComponent<Rigidbody>().isKinematic = false;
+        o.GetComponent<Collider>().enabled = true;
 
         string plato = o.name;
         obj = o;
         if (recetasParaHacer.Contains(plato))
         {
-            recetasParaHacer.Remove(plato); 
+            recetasParaHacer.Remove(plato);
+            audioEntrega.Play(); 
             correcto.enabled = true;
             StartCoroutine(Waiter());
         }

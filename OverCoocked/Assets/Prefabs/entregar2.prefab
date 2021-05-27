@@ -192,7 +192,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2110779686220617422
 Transform:
   m_ObjectHideFlags: 0
@@ -238,7 +238,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34a1fa3a94bcb9247ba15d6afae42c5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obj: {fileID: 0}
   puntoEntrega: {fileID: 2100517902224631998}
   tieneObjeto: 0
   correcto: {fileID: 3965113308904418937}
