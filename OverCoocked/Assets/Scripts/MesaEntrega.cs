@@ -9,6 +9,8 @@ public class MesaEntrega : MonoBehaviour
     List<string> recetasParaHacer;
 
     GameObject obj;
+    public GameObject coins;
+    
     public Transform puntoEntrega; 
     public bool tieneObjeto;
 
@@ -17,6 +19,7 @@ public class MesaEntrega : MonoBehaviour
     public Image correcto;
     public Image mal;
 
+    int puntuacion;
     int timeMax;
     float time;
     private Color alphaColor;
@@ -41,6 +44,7 @@ public class MesaEntrega : MonoBehaviour
         recetasParaHacer.Add("plato_lechuga_tomate");
         Debug.Log("plato_lechuga_tomate");
         correcto.enabled = false;
+        puntuacion = 0;
         mal.enabled = false; 
 
     }
@@ -77,30 +81,37 @@ public class MesaEntrega : MonoBehaviour
         if (recetasParaHacer.Contains(plato))
         {
             recetasParaHacer.Remove(plato);
-            audioEntrega.Play(); 
+            audioEntrega.Play();
             correcto.enabled = true;
+            puntuacion += 1;
+            coins.GetComponent<TextMesh>().text = "coins: " + puntuacion;
             StartCoroutine(Waiter());
         }
-        else mal.enabled = true;
+        else
+        {
+            mal.enabled = true;
+            puntuacion -= 1;
+            coins.GetComponent<TextMesh>().text = "coins: " + puntuacion;
 
 
+        }
     }
 
-    public GameObject CogerPlato()
-    {
-        tieneObjeto = false;
-        mal.enabled = false;
-        correcto.enabled = false;
-        return obj; 
-    }
+        public GameObject CogerPlato()
+        {
+            tieneObjeto = false;
+            mal.enabled = false;
+            correcto.enabled = false;
+            return obj;
+        }
 
-    IEnumerator Waiter()
-    {
-        yield return new WaitForSeconds(2.5f);
-        Destroy(obj);
-        correcto.enabled = false;
-        tieneObjeto = false;
-    }
+        IEnumerator Waiter()
+        {
+            yield return new WaitForSeconds(2.5f);
+            Destroy(obj);
+            correcto.enabled = false;
+            tieneObjeto = false;
+        } 
 
 
 
