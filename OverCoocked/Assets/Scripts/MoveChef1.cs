@@ -25,6 +25,7 @@ public class MoveChef1 : MonoBehaviour
         can_move = true; 
     }
 
+
     void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");
@@ -32,16 +33,12 @@ public class MoveChef1 : MonoBehaviour
 
         if (can_move)
         {
-            if (horizontalInput == 0 || verticalInput == 0)
-            {
+            inputVector = new Vector3(horizontalInput * speed, rb.velocity.y, verticalInput * speed);
+            transform.LookAt(transform.position + new Vector3(inputVector.z, 0, -inputVector.x));
+
+            if (horizontalInput == 0 && verticalInput == 0)
                 anim.SetBool("Walking", false);
-            }
-            else
-            {
-                inputVector = new Vector3(horizontalInput * speed, rb.velocity.y, verticalInput * speed);
-                transform.LookAt(transform.position + new Vector3(inputVector.x, 0, inputVector.z));
-                anim.SetBool("Walking", true);
-            }
+            else anim.SetBool("Walking", true);
         }
     }
 
