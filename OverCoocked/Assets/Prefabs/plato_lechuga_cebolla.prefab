@@ -1220,6 +1220,7 @@ GameObject:
   - component: {fileID: 5406402902725599189}
   - component: {fileID: 647561453654369333}
   - component: {fileID: -2931878374933930183}
+  - component: {fileID: 1725841508955355755}
   m_Layer: 0
   m_Name: plato_lechuga_cebolla
   m_TagString: Untagged
@@ -1313,10 +1314,26 @@ MonoBehaviour:
   prefab_ham_pep: {fileID: 0}
   prefab_ham_c: {fileID: 0}
   prefab_ham_pep_c: {fileID: 0}
+  prefab_p_c: {fileID: 0}
+  prefab_p_pep: {fileID: 0}
+  prefab_p_c_pep: {fileID: 0}
   prefab_p_ham_c: {fileID: 0}
   prefab_p_ham_pep: {fileID: 0}
   prefab_p_ham_c_pep: {fileID: 0}
   tieneAlimento: 0
+--- !u!114 &1725841508955355755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8129531376163923165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f08cb75777bc1264892890ada13dc9ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  algo: {x: 0, y: 0, z: 0}
 --- !u!1 &8773720444820523797
 GameObject:
   m_ObjectHideFlags: 0

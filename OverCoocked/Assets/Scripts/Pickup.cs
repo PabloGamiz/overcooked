@@ -149,7 +149,6 @@ public class Pickup : MonoBehaviour
         canGrabFood = false;
         canGrabPlate = false;
         puedeEntregar = false;
-        Debug.Log("HE SALIDO"); 
         fogon = false;
     }
 
@@ -202,7 +201,10 @@ public class Pickup : MonoBehaviour
 
         obj.transform.parent = boxHolder;
         obj.transform.localPosition = Vector3.zero;
-        obj.transform.eulerAngles = this.transform.GetChild(0).eulerAngles; 
+        Debug.Log(obj.GetComponent<Objeto>().algo);
+        obj.transform.rotation = Quaternion.Euler(obj.GetComponent<Objeto>().algo);
+        Debug.Log(obj.transform.rotation);
+        obj.transform.localRotation = Quaternion.Euler(obj.GetComponent<Objeto>().algo); 
         obj.GetComponent<Rigidbody>().isKinematic = true;
         obj.GetComponent<Rigidbody>().useGravity = false;
 
@@ -276,7 +278,7 @@ public class Pickup : MonoBehaviour
         {
             if (mesaCortar)
             {
-                if (table.GetComponent<InfoTable>().hasObject)
+                if (table.GetComponent<InfoTable>().hasObject && !table.GetComponent<InfoTable>().obj.name.Contains("cortado"))
                 {
                     cortando = true; 
                     table.GetComponent<CuttingTable>().obj = table.GetComponent<InfoTable>().obj;
@@ -370,7 +372,7 @@ public class Pickup : MonoBehaviour
         holdingObject = false;
         o.transform.parent = t;
         o.transform.position = t.position;
-        o.transform.eulerAngles = t.GetChild(0).eulerAngles;
+        //o.transform.eulerAngles = t.GetChild(0).eulerAngles;
 
         o.GetComponent<Rigidbody>().useGravity = true;
         dejar.Play(); 

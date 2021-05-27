@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3582943876534715318}
   - component: {fileID: 2022297320878550251}
   - component: {fileID: 3854740499615282556}
+  - component: {fileID: 1432589428069677150}
   m_Layer: 0
   m_Name: objAlimento_lechuga
   m_TagString: Untagged
@@ -27,13 +28,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3078720556379202147}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 1.92, y: 2.12, z: 4.7}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.6}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &1611685245589108604
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -113,3 +114,16 @@ CapsuleCollider:
   m_Height: 2.4626725
   m_Direction: 2
   m_Center: {x: 0, y: 4.9095025e-16, z: -0.0938938}
+--- !u!114 &1432589428069677150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3078720556379202147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f08cb75777bc1264892890ada13dc9ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  algo: {x: 0, y: 90, z: 0}

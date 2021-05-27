@@ -120,7 +120,7 @@ public class Fogon : MonoBehaviour
             Debug.Log("Estoy aqui");
             if (tipoOlla)
             {
-                if (alim.name.Contains("tomate_cortado") || alim.name.Contains("cebolla_cortada") || alim.name.Contains("champiñon_cortado"))
+                if (alim.name.Contains("tomate_cortado") || alim.name.Contains("cebolla_cortado") || alim.name.Contains("champiñon_cortado"))
                 {
 
                     if (obj.GetComponent<Olla>().numAlim == 0)

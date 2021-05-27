@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5451910402667570643}
   - component: {fileID: 1328988455299880831}
   - component: {fileID: 5528335949977138445}
+  - component: {fileID: 3000223586306307841}
   m_Layer: 0
   m_Name: olla-ch-3
   m_TagString: Untagged
@@ -91,6 +92,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3000223586306307841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4697145576078856775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f08cb75777bc1264892890ada13dc9ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  algo: {x: 0, y: 0, z: 0}
 --- !u!1 &5960768963171023753
 GameObject:
   m_ObjectHideFlags: 0

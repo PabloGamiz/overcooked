@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7274064626925858217}
   - component: {fileID: 2199789691780559974}
   - component: {fileID: 4816508291996931094}
+  - component: {fileID: 340543412267040918}
   m_Layer: 0
   m_Name: olla-t-3 1
   m_TagString: Untagged
@@ -91,6 +92,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &340543412267040918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3437888474798053786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f08cb75777bc1264892890ada13dc9ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  algo: {x: 0, y: 0, z: 0}
 --- !u!1 &3949682429582889319
 GameObject:
   m_ObjectHideFlags: 0

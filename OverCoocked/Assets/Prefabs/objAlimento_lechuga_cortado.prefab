@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 7081791221895897894}
   - component: {fileID: 8468816179492962966}
   - component: {fileID: 375372108861938731}
+  - component: {fileID: 3948585807323472174}
   m_Layer: 0
-  m_Name: objAlimento_lechuga_cortada
+  m_Name: objAlimento_lechuga_cortado
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -113,3 +114,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3948585807323472174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8739076645706138355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f08cb75777bc1264892890ada13dc9ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  algo: {x: 90, y: -90, z: 0}

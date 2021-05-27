@@ -726,6 +726,7 @@ GameObject:
   - component: {fileID: 5406402902725599189}
   - component: {fileID: 647561453654369333}
   - component: {fileID: -2931878374933930183}
+  - component: {fileID: 3517894274076835234}
   m_Layer: 0
   m_Name: 'plato_cebolla_pepinillo '
   m_TagString: Untagged
@@ -826,3 +827,16 @@ MonoBehaviour:
   prefab_p_ham_pep: {fileID: 8129531376163923165, guid: 6bf7fd0182d648742a947b6ace565ed2, type: 3}
   prefab_p_ham_c_pep: {fileID: 8129531376163923165, guid: 7838f35582664f24aa515ddbd40b4bb2, type: 3}
   tieneAlimento: 1
+--- !u!114 &3517894274076835234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8129531376163923165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f08cb75777bc1264892890ada13dc9ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  algo: {x: 0, y: 0, z: 0}

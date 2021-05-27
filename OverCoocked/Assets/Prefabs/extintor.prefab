@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4901076981549975687}
   - component: {fileID: 4901076981549975690}
   - component: {fileID: 4901076981549975685}
+  - component: {fileID: 502296595900560786}
   m_Layer: 0
   m_Name: extintor
   m_TagString: Untagged
@@ -29,14 +30,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4901076981549975686}
-  m_LocalRotation: {x: -0.76604444, y: 0, z: -0, w: 0.64278764}
+  m_LocalRotation: {x: -0.54167527, y: 0.45451948, z: 0.54167527, w: 0.45451948}
   m_LocalPosition: {x: 6.331617, y: 1.78, z: -1}
   m_LocalScale: {x: 0.1, y: 0.3, z: 0.03}
   m_Children:
   - {fileID: 7256842070101560680}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -100, y: 90, z: 0}
 --- !u!33 &8709984450892406169
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -145,6 +146,19 @@ MonoBehaviour:
   puedoApagar: 0
   fogon: {fileID: 0}
   humoParticulas: {fileID: 7256842070101560681}
+--- !u!114 &502296595900560786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4901076981549975686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f08cb75777bc1264892890ada13dc9ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  algo: {x: -100, y: -90, z: 0}
 --- !u!1 &7256842070101560687
 GameObject:
   m_ObjectHideFlags: 0

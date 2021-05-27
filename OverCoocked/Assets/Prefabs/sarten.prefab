@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5649314226218581927}
   - component: {fileID: 1735367468795754262}
   - component: {fileID: 1743663806122053347}
+  - component: {fileID: 1802888328186731240}
   m_Layer: 0
   m_Name: sarten
   m_TagString: Untagged
@@ -28,13 +29,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9056900960180818304}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: -0.6531675, y: 0.2706453, z: 0.27055082, w: 0.65339553}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.08, z: 0.02}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -89.98, y: 45, z: 0}
 --- !u!33 &4707554953261450399
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -129,3 +130,17 @@ MonoBehaviour:
   prefab_sartenHamburgesaNoHecha: {fileID: 9056900960180818304, guid: d3657a76718d2de489a4f4a118047dfd, type: 3}
   prefab_sartenHamburgesaHecha: {fileID: 9056900960180818304, guid: b6db042c4ed4a2d4c81853d745ea7513, type: 3}
   tieneAlimento: 0
+  alimentoTerminado: 0
+--- !u!114 &1802888328186731240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9056900960180818304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f08cb75777bc1264892890ada13dc9ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  algo: {x: -90, y: 45, z: 0}

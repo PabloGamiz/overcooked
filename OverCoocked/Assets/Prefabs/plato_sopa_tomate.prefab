@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1151303905038860950}
   - component: {fileID: 4767788531750484271}
   - component: {fileID: 779636029963191612}
+  - component: {fileID: 175813510242134683}
   m_Layer: 0
   m_Name: plato_sopa_tomate
   m_TagString: Untagged
@@ -129,4 +130,47 @@ MonoBehaviour:
   prefabSopaTomate: {fileID: 44343433736643906}
   "prefabSopaChampi\xF1on": {fileID: 1162759977589051572, guid: 9be95ce8ab5a63f4c8420bbffd631bbc, type: 3}
   prefabSopaCebolla: {fileID: 3034410389083175624, guid: 42893402998c396499d33e37f27dff0c, type: 3}
+  prefab_t: {fileID: 0}
+  prefab_l: {fileID: 0}
+  prefab_ham: {fileID: 0}
+  prefab_p: {fileID: 0}
+  prefab_ham_t: {fileID: 0}
+  prefab_ham_l: {fileID: 0}
+  prefab_ham_t_l: {fileID: 0}
+  prefab_t_l: {fileID: 0}
+  prefab_p_t: {fileID: 0}
+  prefab_p_l: {fileID: 0}
+  prefab_p_ham: {fileID: 0}
+  prefab_p_ham_t: {fileID: 0}
+  prefab_p_ham_l: {fileID: 0}
+  prefab_p_t_l: {fileID: 0}
+  prefab_p_ham_t_l: {fileID: 0}
+  prefab_c: {fileID: 0}
+  prefab_pep: {fileID: 0}
+  prefab_c_pep: {fileID: 0}
+  prefab_l_c: {fileID: 0}
+  prefab_t_c: {fileID: 0}
+  prefab_l_t_c: {fileID: 0}
+  prefab_ham_pep: {fileID: 0}
+  prefab_ham_c: {fileID: 0}
+  prefab_ham_pep_c: {fileID: 0}
+  prefab_p_c: {fileID: 0}
+  prefab_p_pep: {fileID: 0}
+  prefab_p_c_pep: {fileID: 0}
+  prefab_p_ham_c: {fileID: 0}
+  prefab_p_ham_pep: {fileID: 0}
+  prefab_p_ham_c_pep: {fileID: 0}
   tieneAlimento: 1
+--- !u!114 &175813510242134683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44343433736643906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f08cb75777bc1264892890ada13dc9ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  algo: {x: -90, y: 0, z: 0}
