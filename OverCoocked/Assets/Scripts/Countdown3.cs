@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Countdown3 : MonoBehaviour
 {
+    public GameObject player;
     public GameObject confeti;
     public GameObject countdown;
     public GameObject ready;
@@ -36,6 +37,7 @@ public class Countdown3 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player.GetComponent<MoveChef>().can_move = false;
         recetas = new List<int>();
         initial = true;
         Receta_b = Resources.Load("Receta_b") as GameObject;
@@ -64,6 +66,7 @@ public class Countdown3 : MonoBehaviour
         }
         else if (seconds == 0)
         {
+            player.GetComponent<MoveChef>().can_move = false;
             Debug.Log("dentro de 0 segundos");
             confeti.SetActive(true);
             StartCoroutine(esperar_confeti());
@@ -93,6 +96,7 @@ public class Countdown3 : MonoBehaviour
         go.SetActive(false);
         go1.SetActive(false);
         takeAway = true;
+        player.GetComponent<MoveChef>().can_move = true;
     }
 
     IEnumerator TimerTake()
