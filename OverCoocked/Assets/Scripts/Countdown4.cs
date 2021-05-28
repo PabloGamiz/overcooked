@@ -231,4 +231,39 @@ public class Countdown4 : MonoBehaviour
         //Debug.Log("final crear");
     }
 
+    public List<int> recetas_actuales()
+    {
+        List<int> aux = new List<int>();
+        if (recetas.Count < 5)
+        {
+            for (int i = 0; i < recetas.Count; ++i)
+            {
+                aux.Add(recetas[i]);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < 5; ++i)
+            {
+                aux.Add(recetas[i]);
+            }
+        }
+        return aux;
+    }
+
+
+    public void eliminar_receta(int id)
+    {
+        bool borrada = false;
+        int i = 0;
+        while (!borrada && i < recetas.Count)
+        {
+            if (recetas[i] == id)
+                recetas.RemoveAt(i);
+            ++i;
+        }
+
+        actualizar_recetas();
+    }
+
 }

@@ -31,7 +31,7 @@ public class MoveChef1 : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-        if (can_move)
+        if (GetComponent<MoveChef>().can_move)
         {
             inputVector = new Vector3(horizontalInput * speed, rb.velocity.y, verticalInput * speed);
             transform.LookAt(transform.position + new Vector3(inputVector.z, 0, -inputVector.x));

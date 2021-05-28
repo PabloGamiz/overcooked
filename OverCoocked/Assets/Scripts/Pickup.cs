@@ -244,7 +244,7 @@ public class Pickup : MonoBehaviour
 
         coger.Play(); 
         objectHolded = obj;
-        Physics.IgnoreCollision(player.gameObject.GetComponent<Collider>(), obj.GetComponent<Collider>(), true);
+        Physics.IgnoreCollision(this.gameObject.GetComponent<Collider>(), obj.GetComponent<Collider>(), true);
         /*capCol.height = 1.59f;
         capCol.center = new Vector3(-0.016f, 0.546f, 0.2f);*/
     }
@@ -300,11 +300,7 @@ public class Pickup : MonoBehaviour
                     CogerObjeto(table.GetComponent<InfoTable>().obj);
                 }
             }
-            else if (puedeEntregar && objectHolded.name.Contains("plato"))
-            {
-                if(table.GetComponent<MesaEntrega>().tieneObjeto)
-                    CogerObjeto(table.GetComponent<MesaEntrega>().CogerPlato());
-            }
+
 
 
         }

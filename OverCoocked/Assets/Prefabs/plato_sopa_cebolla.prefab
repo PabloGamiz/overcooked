@@ -187,4 +187,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f08cb75777bc1264892890ada13dc9ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  algo: {x: -90, y: 0, z: 0}
+  algo: {x: 0, y: 0, z: 0}
