@@ -10669,6 +10669,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3703251390640165918, guid: 77d8f5dc98bd0234c9be4bf7b6907499, type: 3}
   m_PrefabInstance: {fileID: 1106738539}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1106738541 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7891590660713323163, guid: 77d8f5dc98bd0234c9be4bf7b6907499, type: 3}
+  m_PrefabInstance: {fileID: 1106738539}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1106857444 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6030517150916678576, guid: af7bbcf9fbbfa72409383d29d86ad2da, type: 3}
@@ -15308,6 +15313,57 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 69fc7781a7286a84a9f14c4e86f0e066, type: 3}
   m_PrefabInstance: {fileID: 1524538848}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1528204300
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1528204302}
+  - component: {fileID: 1528204301}
+  m_Layer: 0
+  m_Name: GodMode
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1528204301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1528204300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9c74b2fff794f247a7751574bf62d60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1080548145}
+  fogon1: {fileID: 1043337165}
+  fogon2: {fileID: 1106738541}
+  mesaCortar1: {fileID: 363361441}
+  mesaCortar2: {fileID: 1341536687}
+  contrl: {fileID: 2113133671}
+  plato: {fileID: 8129531376163923165, guid: 0c4ec3e68b55af440978880978ce7006, type: 3}
+  escena: 3
+--- !u!4 &1528204302
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1528204300}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.661142, y: -3.1906996, z: -0.96358347}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 55
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1531061841
 PrefabInstance:
   m_ObjectHideFlags: 0

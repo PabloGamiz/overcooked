@@ -251,7 +251,7 @@ MonoBehaviour:
   prefab_ham_t_l: {fileID: 8129531376163923165, guid: de2a30c575b8f2b46998365b5db0ab4c, type: 3}
   prefab_t_l: {fileID: 8129531376163923165, guid: 8f2f46138cb6e3d43b1c0eb123622d78, type: 3}
   prefab_p_t: {fileID: 8129531376163923165, guid: bb120c60a415b0844a24e4170964ab22, type: 3}
-  prefab_p_l: {fileID: 8129531376163923165, guid: 3e9e180f0ad64564e8c99838f4e4c7d9, type: 3}
+  prefab_p_l: {fileID: 8129531376163923165, guid: 8f2ca74a8cc30244daa846efbf583ea3, type: 3}
   prefab_p_ham: {fileID: 8129531376163923165, guid: d933993f3c23d674abb1026b002cbc8d, type: 3}
   prefab_p_ham_t: {fileID: 8129531376163923165, guid: 608308f80ac5f974dbf08c5375096a9f, type: 3}
   prefab_p_ham_l: {fileID: 8129531376163923165, guid: 3e9e180f0ad64564e8c99838f4e4c7d9, type: 3}
@@ -260,7 +260,7 @@ MonoBehaviour:
   prefab_c: {fileID: 8129531376163923165, guid: 26b5db5419690ea45be30f7b444620c0, type: 3}
   prefab_pep: {fileID: 8129531376163923165, guid: fdfedb48353e1c44082ba54ca1532ef7, type: 3}
   prefab_c_pep: {fileID: 0}
-  prefab_l_c: {fileID: 0}
+  prefab_l_c: {fileID: 8129531376163923165, guid: ce82ff0fded043b43bb1b8a30bac6e1a, type: 3}
   prefab_t_c: {fileID: 0}
   prefab_l_t_c: {fileID: 0}
   prefab_ham_pep: {fileID: 0}
@@ -271,7 +271,7 @@ MonoBehaviour:
   prefab_p_c_pep: {fileID: 0}
   prefab_p_ham_c: {fileID: 0}
   prefab_p_ham_pep: {fileID: 0}
-  prefab_p_ham_c_pep: {fileID: 0}
+  prefab_p_ham_c_pep: {fileID: 8129531376163923165, guid: 7838f35582664f24aa515ddbd40b4bb2, type: 3}
   tieneAlimento: 0
 --- !u!114 &7818440052905030327
 MonoBehaviour:
@@ -285,4 +285,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f08cb75777bc1264892890ada13dc9ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotation: {fileID: 8906489600744423015}
+  algo: {x: 0, y: 0, z: 0}
