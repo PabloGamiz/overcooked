@@ -2771,6 +2771,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b89e40ff7c8ea54cb143ce1858916bb, type: 3}
+--- !u!1 &240925032 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5527082963661786803, guid: 4b89e40ff7c8ea54cb143ce1858916bb, type: 3}
+  m_PrefabInstance: {fileID: 240925031}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &247576710 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1623522527863629420, guid: 5bb4e7011802dac419b24b8ecf65318d, type: 3}
@@ -11921,6 +11926,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73cd702fbe9772249af1137b879a26be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 919132148765788271}
+  confeti: {fileID: 240925032}
+  countdown: {fileID: 1136409803}
+  ready: {fileID: 1350971994}
+  Escene: {fileID: 516946096}
+  go: {fileID: 202475410}
+  countdown1: {fileID: 1690177059}
+  ready1: {fileID: 1254824455}
+  Escene1: {fileID: 1339543970}
+  go1: {fileID: 1095941567}
 --- !u!102 &1136409806
 TextMesh:
   serializedVersion: 3

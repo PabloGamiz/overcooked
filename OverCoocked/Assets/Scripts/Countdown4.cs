@@ -21,6 +21,8 @@ public class Countdown4 : MonoBehaviour
     bool initial = true;
     bool finish_text = false;
 
+    int numero_recetas;
+
     private List<GameObject> objetos_recetas;
     private List<int> recetas;
 
@@ -37,6 +39,7 @@ public class Countdown4 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        numero_recetas = 0;
         player.GetComponent<MoveChef>().can_move = false;
         recetas = new List<int>();
         initial = true;
@@ -54,6 +57,16 @@ public class Countdown4 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKey(KeyCode.Alpha1))
+            SceneManager.LoadScene("Scenes/escena1");
+        else if (Input.GetKey(KeyCode.Alpha2))
+            SceneManager.LoadScene("Scenes/escena2");
+        else if (Input.GetKey(KeyCode.Alpha3))
+            SceneManager.LoadScene("Scenes/escena3");
+        else if (Input.GetKey(KeyCode.Alpha4))
+            SceneManager.LoadScene("Scenes/escena4");
+        else if (Input.GetKey(KeyCode.Alpha5))
+            SceneManager.LoadScene("Scenes/escena5");
         if (initial)
         {
             StartCoroutine(InitialTexts());
@@ -104,8 +117,8 @@ public class Countdown4 : MonoBehaviour
         takeAway = false;
         if (seconds % 15 == 0)
         {
+            Debug.Log("antes de escojer");
             escojerRecetas();
-            actualizar_recetas();
 
         }
         yield return new WaitForSeconds(1);
@@ -127,113 +140,99 @@ public class Countdown4 : MonoBehaviour
 
     void escojerRecetas()
     {
+        if (numero_recetas < 5)
+            ++numero_recetas;
         Debug.Log("dentro escojer");
         int n = Random.Range(1, 9);
-        if (n >= 1 && n <= 3)
+        if (n >= 1 && n <= 1)
         {
             recetas.Add(3);
+            if (numero_recetas < 5)
+                objetos_recetas.Add((GameObject)Instantiate(Receta_3, new Vector3(-5.5f + 2.75f * (numero_recetas - 1), 14, -10.75f), Receta_3.transform.rotation));
+
         }
         else if (n >= 4 && n <= 6)
         {
             recetas.Add(5);
+            if (numero_recetas < 5)
+                objetos_recetas.Add((GameObject)Instantiate(Receta_5, new Vector3(-5.5f + 2.75f * (numero_recetas - 1), 14, -10.75f), Receta_5.transform.rotation));
         }
         else
         {
             recetas.Add(8);
+            if (numero_recetas < 5)
+                objetos_recetas.Add((GameObject)Instantiate(Receta_8, new Vector3(-5.5f + 2.75f * (numero_recetas - 1), 14, -10.75f), Receta_8.transform.rotation));
         }
 
         Debug.Log("final escojer");
         Debug.Log("tamaño recetas: " + recetas.Count);
     }
 
-
-    /*void generar_receta()
-    {
-        Debug.Log("dentro generar");
-        Debug.Log("valor de r: " + recetas[actual]);
-        if (recetas[actual] == 0)
-            Instantiate(Receta_b, new Vector3(-5.5f + 2.75f * (actual - 1), 14, -10.6f), Receta_b.transform.rotation);
-        else if (recetas[actual] == 1)
-            Instantiate(Receta_1, new Vector3(-5.5f + 2.75f * (actual - 1), 14, -10.6f), Receta_1.transform.rotation);
-        else if (recetas[actual] == 2)
-            Instantiate(Receta_2, new Vector3(-5.5f + 2.75f * (actual - 1), 14, -10.6f), Receta_2.transform.rotation);
-        else if (recetas[actual] == 3)
-            Instantiate(Receta_3, new Vector3(-5.5f + 2.75f * (actual - 1), 14, -10.6f), Receta_3.transform.rotation);
-        else if (recetas[actual] == 4)
-            Instantiate(Receta_4, new Vector3(-5.5f + 2.75f * (actual - 1), 14, -10.6f), Receta_4.transform.rotation);
-        else if (recetas[actual] == 5)
-            Instantiate(Receta_5, new Vector3(-5.5f + 2.75f * (actual - 1), 14, -10.6f), Receta_5.transform.rotation);
-        else if (recetas[actual] == 6)
-            Instantiate(Receta_6, new Vector3(-5.5f + 2.75f * (actual - 1), 14, -10.6f), Receta_6.transform.rotation);
-        else if (recetas[actual] == 7)
-            Instantiate(Receta_7, new Vector3(-5.5f + 2.75f * (actual - 1), 14, -10.6f), Receta_7.transform.rotation);
-        else
-            Instantiate(Receta_8, new Vector3(-5.5f + 2.75f * (actual - 1), 14, -10.6f), Receta_8.transform.rotation);
-        Debug.Log("despues generar");
-    }*/
-
-    void actualizar_recetas()
+    void actualizar_recetas(int n)
     {
         Debug.Log("dentro crear");
         if (recetas.Count < 5 && recetas.Count != 0)
         {
             Debug.Log("dentro <5");
-            for (int i = 0; i < recetas.Count; ++i)
+            for (int i = (n - 1); i < recetas.Count; ++i)
             {
 
                 if (recetas[i] == 0)
-                    Instantiate(Receta_b, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_b.transform.rotation);
+                    objetos_recetas.Add((GameObject)Instantiate(Receta_b, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_b.transform.rotation));
                 else if (recetas[i] == 1)
-                    Instantiate(Receta_1, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_1.transform.rotation);
+                    objetos_recetas.Add((GameObject)Instantiate(Receta_1, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_1.transform.rotation));
                 else if (recetas[i] == 2)
-                    Instantiate(Receta_2, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_2.transform.rotation);
+                    objetos_recetas.Add((GameObject)Instantiate(Receta_2, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_2.transform.rotation));
                 else if (recetas[i] == 3)
-                    Instantiate(Receta_3, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_3.transform.rotation);
+                    objetos_recetas.Add((GameObject)Instantiate(Receta_3, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_3.transform.rotation));
                 else if (recetas[i] == 4)
-                    Instantiate(Receta_4, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_4.transform.rotation);
+                    objetos_recetas.Add((GameObject)Instantiate(Receta_4, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_4.transform.rotation));
                 else if (recetas[i] == 5)
-                    Instantiate(Receta_5, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_5.transform.rotation);
+                    objetos_recetas.Add((GameObject)Instantiate(Receta_5, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_5.transform.rotation));
                 else if (recetas[i] == 6)
-                    Instantiate(Receta_6, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_6.transform.rotation);
+                    objetos_recetas.Add((GameObject)Instantiate(Receta_6, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_6.transform.rotation));
                 else if (recetas[i] == 7)
-                    Instantiate(Receta_7, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_7.transform.rotation);
+                    objetos_recetas.Add((GameObject)Instantiate(Receta_7, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_7.transform.rotation));
                 else
-                    Instantiate(Receta_8, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_8.transform.rotation);
+                    objetos_recetas.Add((GameObject)Instantiate(Receta_8, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_8.transform.rotation));
 
-                ////Debug.Log("crea objeto");
+                Debug.Log("crea objeto");
                 //obj.GetComponent<change_material>().cambiar_material(recetas[i]);
                 Debug.Log("ha cambiado material");
             }
+            numero_recetas = recetas.Count;
         }
         else if (recetas.Count != 0)
         {
             Debug.Log("dentro >=5");
-            for (int i = 0; i < 5; ++i)
+            for (int i = (n - 1); i < 5; ++i)
             {
                 if (recetas[i] == 0)
-                    Instantiate(Receta_b, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_b.transform.rotation);
+                    objetos_recetas.Add((GameObject)Instantiate(Receta_b, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_b.transform.rotation));
                 else if (recetas[i] == 1)
-                    Instantiate(Receta_1, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_1.transform.rotation);
+                    objetos_recetas.Add((GameObject)Instantiate(Receta_1, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_1.transform.rotation));
                 else if (recetas[i] == 2)
-                    Instantiate(Receta_2, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_2.transform.rotation);
+                    objetos_recetas.Add((GameObject)Instantiate(Receta_2, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_2.transform.rotation));
                 else if (recetas[i] == 3)
-                    Instantiate(Receta_3, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_3.transform.rotation);
+                    objetos_recetas.Add((GameObject)Instantiate(Receta_3, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_3.transform.rotation));
                 else if (recetas[i] == 4)
-                    Instantiate(Receta_4, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_4.transform.rotation);
+                    objetos_recetas.Add((GameObject)Instantiate(Receta_4, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_4.transform.rotation));
                 else if (recetas[i] == 5)
-                    Instantiate(Receta_5, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_5.transform.rotation);
+                    objetos_recetas.Add((GameObject)Instantiate(Receta_5, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_5.transform.rotation));
                 else if (recetas[i] == 6)
-                    Instantiate(Receta_6, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_6.transform.rotation);
+                    objetos_recetas.Add((GameObject)Instantiate(Receta_6, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_6.transform.rotation));
                 else if (recetas[i] == 7)
-                    Instantiate(Receta_7, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_7.transform.rotation);
+                    objetos_recetas.Add((GameObject)Instantiate(Receta_7, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_7.transform.rotation));
                 else
-                    Instantiate(Receta_8, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_8.transform.rotation);
+                    objetos_recetas.Add((GameObject)Instantiate(Receta_8, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_8.transform.rotation));
                 //  GameObject obj = (GameObject)Instantiate(Receta, new Vector3(-5.5f + 2.75f * i, 14, -10.6f), Receta.transform.rotation);
                 //  obj.GetComponent<change_material>().cambiar_material(recetas[i]);
             }
+            numero_recetas = 5;
         }
         //Debug.Log("final crear");
     }
+
 
     public List<int> recetas_actuales()
     {
@@ -260,14 +259,35 @@ public class Countdown4 : MonoBehaviour
     {
         bool borrada = false;
         int i = 0;
-        while (!borrada && i < recetas.Count)
+        while (!borrada)
         {
             if (recetas[i] == id)
+            {
                 recetas.RemoveAt(i);
+                borrada = true;
+                Destroy(objetos_recetas[i]);
+            }
+
             ++i;
         }
+        if (objetos_recetas.Count < 5)
+        {
+            for (int j = i - 1; j < recetas.Count; ++j)
+            {
+                Destroy(objetos_recetas[j]);
+            }
+            --numero_recetas;
+        }
+        else
+        {
+            for (int j = i - 1; j < 5; ++j)
+            {
+                Destroy(objetos_recetas[j]);
+            }
+        }
 
-        actualizar_recetas();
+
+        actualizar_recetas(i);
     }
 
 }

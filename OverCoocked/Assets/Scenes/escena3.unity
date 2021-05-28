@@ -21012,6 +21012,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7a4c07769c741a4a95042709575e5f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1080548145}
   confeti: {fileID: 1844126519}
   countdown: {fileID: 2113133671}
   ready: {fileID: 465603650}
