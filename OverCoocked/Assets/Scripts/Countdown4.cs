@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class Countdown4 : MonoBehaviour
 {
+    public AudioSource musicaEscena;
+    public AudioSource musicaAmbiente; 
     public GameObject player;
     public GameObject confeti;
     public GameObject countdown;
@@ -39,6 +41,8 @@ public class Countdown4 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        musicaEscena.Play();
+        musicaAmbiente.Play(); 
         numero_recetas = 0;
         player.GetComponent<MoveChef>().can_move = false;
         recetas = new List<int>();
@@ -79,6 +83,8 @@ public class Countdown4 : MonoBehaviour
         }
         else if (seconds == 0)
         {
+            musicaEscena.Stop();
+            musicaAmbiente.Stop(); 
             player.GetComponent<MoveChef>().can_move = false;
             Debug.Log("dentro de 0 segundos");
             confeti.SetActive(true);
