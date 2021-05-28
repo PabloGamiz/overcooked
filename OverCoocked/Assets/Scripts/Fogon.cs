@@ -130,14 +130,27 @@ public class Fogon : MonoBehaviour
                         cocinado = false; 
                         statusBar.Cut();
                         GameObject newObject = obj.GetComponent<Olla>().AñadirAlimentoOlla(alim, posicionOlla);
+                        newObject.GetComponent<Rigidbody>().isKinematic = true;
+                        newObject.GetComponent<BoxCollider>().enabled = false;
                         Destroy(obj);
                         obj = newObject;
                         return true;
                     }
                     else if (obj.GetComponent<Olla>().numAlim <= 2 && alim.name.Contains(obj.GetComponent<Olla>().tipoAlimento))
                     {
-                        statusBar.time = statusBar.time - 6;
+                        if (cocinado)
+                        {
+                            cocinado = false;
+                            CancelInvoke("ToggleState");
+                            peligro.enabled = false;
+                            statusBar.Cut();
+                            acabado.enabled = false;
+                        }
+                        statusBar.time = 0;
+                        cocinado = false;
                         GameObject newObject = obj.GetComponent<Olla>().AñadirAlimento(alim, posicionOlla);
+                        newObject.GetComponent<Rigidbody>().isKinematic = true;
+                        newObject.GetComponent<BoxCollider>().enabled = false;
                         Destroy(obj);
                         obj = newObject;
                         return true;
@@ -189,6 +202,8 @@ public class Fogon : MonoBehaviour
         tieneObjecto = true;
         obj = utensilio;
         utensilio.GetComponent<Rigidbody>().isKinematic = true;
+        utensilio.GetComponent<BoxCollider>().enabled = false;
+        
         
 
         if (utensilio.name.Contains("olla"))
@@ -215,6 +230,7 @@ public class Fogon : MonoBehaviour
             utensilio.transform.parent = posicionSarten;
             utensilio.transform.position = posicionSarten.position;
             utensilio.transform.rotation =posicionSarten.rotation;
+
 
             if (utensilio.GetComponent<Sarten>().tieneAlimento)
             {

@@ -81,15 +81,15 @@ public class Plato : MonoBehaviour
 
         if (tipoPlato == "sopa_tomate")
         {
-            newObj = (GameObject)Instantiate(prefabSopaTomate, transform.position, prefabSopaTomate.transform.rotation);
+            newObj = (GameObject)Instantiate(prefabSopaTomate, transform.position, Quaternion.Euler(prefabSopaChampiñon.GetComponent<Objeto>().algo));
         }
         else if (tipoPlato == "sopa_cebolla")
         {
-            newObj = (GameObject)Instantiate(prefabSopaCebolla, transform.position, prefabSopaCebolla.transform.rotation);
+            newObj = (GameObject)Instantiate(prefabSopaCebolla, transform.position, Quaternion.Euler(prefabSopaChampiñon.GetComponent<Objeto>().algo));
         }
         else //tipoPlato == "sopa_champiñon"
         {
-            newObj = (GameObject)Instantiate(prefabSopaChampiñon, transform.position, prefabSopaChampiñon.transform.rotation);
+            newObj = (GameObject)Instantiate(prefabSopaChampiñon, transform.position, Quaternion.Euler(prefabSopaChampiñon.GetComponent<Objeto>().algo));
         }
 
         return newObj; 

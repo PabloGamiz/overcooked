@@ -138,6 +138,7 @@ public class Pickup : MonoBehaviour
             
             puedeEntregar = false;
             if (collision.gameObject.name.Contains("mesa cortar")) mesaCortar = true;
+            else mesaCortar=false; 
 
         }
         else if (collision.gameObject.name.Contains("entregar"))
@@ -146,12 +147,14 @@ public class Pickup : MonoBehaviour
             can = true;
             puedeEntregar = true; 
             table = collision.gameObject;
+            mesaCortar = false;
         }
         else if (collision.gameObject.name.Contains("alimentos"))
         {
             can = false; 
             canGrabFood = true;
             table = collision.gameObject;
+            mesaCortar = false;
             //puedeEntregar = false;
         }
         else if (collision.gameObject.name.Contains("fogon"))
@@ -159,6 +162,7 @@ public class Pickup : MonoBehaviour
             can = false; 
             fogon = true;
             table = collision.gameObject;
+            mesaCortar = false;
             //puedeEntregar = false;
         }
         else if (collision.gameObject.name.Contains("platos"))
@@ -166,6 +170,7 @@ public class Pickup : MonoBehaviour
             canGrabPlate = true;
             can = false; 
             table = collision.gameObject;
+            mesaCortar = false;
             //puedeEntregar = false;
         }
         
@@ -370,14 +375,29 @@ public class Pickup : MonoBehaviour
                 //Debug.Log("Estoy aqui");
                 if (table.GetComponent<Fogon>().cocinado) // Coge el plato ya esta listo
                 {
-                    string tipoPlato = table.GetComponent<Fogon>().AñadirComidaPlato();
+                    
                     GameObject platoComida;
 
-                    if (table.GetComponent<Fogon>().tipoOlla) platoComida = objectHolded.GetComponent<Plato>().EmplatarPlatoSopa(tipoPlato);
-                    else platoComida = objectHolded.GetComponent<Plato>().EmplatarPlatoNormal(tipoPlato);
+                    if (table.GetComponent<Fogon>().tipoOlla)
+                    {
+                        if (table.GetComponent<Fogon>().obj.GetComponent<Olla>().numAlim == 3)
+                        {
+                            string tipoPlato = table.GetComponent<Fogon>().AñadirComidaPlato();
+                            platoComida = objectHolded.GetComponent<Plato>().EmplatarPlatoSopa(tipoPlato);
+                            Destroy(objectHolded);
+                            CogerObjeto(platoComida);
+                        }
+
+                    }
+                    else
+                    {
+                        string tipoPlato = table.GetComponent<Fogon>().AñadirComidaPlato();
+                        platoComida = objectHolded.GetComponent<Plato>().EmplatarPlatoNormal(tipoPlato);
+                        Destroy(objectHolded);
+                        CogerObjeto(platoComida);
+                    }
                     
-                    Destroy(objectHolded);
-                    CogerObjeto(platoComida); 
+                    
                 }
             }
         }
@@ -414,7 +434,7 @@ public class Pickup : MonoBehaviour
 
     void PrepararPlato()
     {
-        if (objectHolded.name.Contains("olla") && !objectHolded.name.Contains("objAlimento")  && objectHolded.GetComponent<Olla>().alimentoTerminado) // Preparar plato tipo sopa
+        if (objectHolded.name.Contains("olla") && !objectHolded.name.Contains("objAlimento")  && objectHolded.GetComponent<Olla>().alimentoTerminado && objectHolded.GetComponent<Olla>().numAlim ==3) // Preparar plato tipo sopa
         {
             //Instanciar plato de sopa que hay en la mesa
             PrepararSopa(); 

@@ -31,6 +31,8 @@ public class CuttingTable : MonoBehaviour
     public ParticleSystem tomateParticulas;
     public ParticleSystem cebollaParticulas;
     public ParticleSystem champiñonParticulas;
+    public ParticleSystem carneParticulas;
+    public ParticleSystem pepinoParticulas;
 
 
 
@@ -115,6 +117,14 @@ public class CuttingTable : MonoBehaviour
         {
             ensaladaParticulas.gameObject.SetActive(true);
         }
+        else if (obj.name.Contains("chuleta"))
+        {
+            carneParticulas.gameObject.SetActive(true);
+        }
+        else if (obj.name.Contains("pepinillo"))
+        {
+            pepinoParticulas.gameObject.SetActive(true); 
+        }
 
 
         statusBar.Cut(); 
@@ -132,6 +142,8 @@ public class CuttingTable : MonoBehaviour
         cebollaParticulas.gameObject.SetActive(false);
         champiñonParticulas.gameObject.SetActive(false);
         ensaladaParticulas.gameObject.SetActive(false);
+        carneParticulas.gameObject.SetActive(false);
+        pepinoParticulas.gameObject.SetActive(false);
     }
 
 

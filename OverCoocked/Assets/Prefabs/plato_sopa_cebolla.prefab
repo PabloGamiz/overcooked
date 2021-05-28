@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 7815659050573888431}
   - component: {fileID: -8734813405201651297}
   - component: {fileID: 3322137992782238491}
-  - component: {fileID: 4393109749572522228}
   m_Layer: 0
   m_Name: plato_sopa_cebolla
   m_TagString: Untagged
@@ -174,17 +173,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f08cb75777bc1264892890ada13dc9ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  algo: {x: 0, y: 0, z: 0}
---- !u!114 &4393109749572522228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3034410389083175624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f08cb75777bc1264892890ada13dc9ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  algo: {x: 0, y: 0, z: 0}
+  algo: {x: -90, y: 0, z: 90}
