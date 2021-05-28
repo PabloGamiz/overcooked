@@ -212,15 +212,7 @@ public class Pickup : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Q))
                 {
-                    dejar.Play(); 
-                    holdingObject = false;
-                    objExtintor = false;
-                    objectHolded.transform.parent = null;
-                    objectHolded.GetComponent<Rigidbody>().useGravity = true;
-                    objectHolded.GetComponent<Rigidbody>().isKinematic = false;
-                    objectHolded.GetComponent<Collider>().enabled = true;
-                    Physics.IgnoreCollision(player.gameObject.GetComponent<Collider>(), objectHolded.GetComponent<Collider>(), false);
-                    ResetCapsuleCollider();
+                    DejarCaerObjeto(); 
                 }
 
             }
@@ -229,7 +221,20 @@ public class Pickup : MonoBehaviour
 
     }
 
-    void CogerObjeto(GameObject obj)
+    public void DejarCaerObjeto()
+    {
+        dejar.Play();
+        holdingObject = false;
+        objExtintor = false;
+        objectHolded.transform.parent = null;
+        objectHolded.GetComponent<Rigidbody>().useGravity = true;
+        objectHolded.GetComponent<Rigidbody>().isKinematic = false;
+        objectHolded.GetComponent<Collider>().enabled = true;
+        Physics.IgnoreCollision(player.gameObject.GetComponent<Collider>(), objectHolded.GetComponent<Collider>(), false);
+        ResetCapsuleCollider();
+    }
+
+    public void CogerObjeto(GameObject obj)
     {
 
         /* Función para coger objectos para player

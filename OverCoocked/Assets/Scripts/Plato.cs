@@ -377,4 +377,40 @@ public class Plato : MonoBehaviour
         }
     }
 
+    public GameObject PlatosGodMode(int id)
+    {
+        if( id == 1)
+        {
+            return (GameObject)Instantiate(prefab_l, transform.position, prefab_l.transform.rotation);
+        }
+        else if (id == 2)
+        {
+            return (GameObject)Instantiate(prefab_t_l, transform.position, prefab_t_l.transform.rotation);
+        }
+        else if (id == 3)
+        {
+            return (GameObject)Instantiate(prefab_l_c, transform.position, prefab_l_c.transform.rotation);
+        }
+        else if (id == 4)
+        {
+            return (GameObject)Instantiate(prefabSopaTomate, transform.position, prefabSopaTomate.transform.rotation);
+        }
+        else if (id == 5)
+        {
+            return (GameObject)Instantiate(prefabSopaCebolla, transform.position, prefabSopaCebolla.transform.rotation);
+        }
+        else if(id == 6)
+        {
+            return (GameObject)Instantiate(prefabSopaChampiñon, transform.position, prefabSopaChampiñon.transform.rotation);
+        }
+        else if (id == 7)
+        {
+            return (GameObject)Instantiate(prefab_p_ham_t_l, transform.position, prefab_p_ham_t_l.transform.rotation);
+        }
+        else
+        {
+            return (GameObject)Instantiate(prefab_p_ham_c_pep, transform.position, prefab_p_ham_c_pep.transform.rotation);
+        }
+    }
+
 }

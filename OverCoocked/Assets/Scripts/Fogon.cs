@@ -32,7 +32,9 @@ public class Fogon : MonoBehaviour
 
     public bool cocinado;
     public bool quemando;
-    bool warning; 
+    public bool puedeQuemarse;
+    public bool tieneAlimento; 
+    bool warning;
     float tiempoQuemado;
     
 
@@ -40,10 +42,11 @@ public class Fogon : MonoBehaviour
     void Start()
     {
         tieneObjecto = true;
+        tieneAlimento = false; 
         cocinado = false;
         quemando = false;
         warning = false;
-
+        puedeQuemarse = true; 
         peligro.enabled = false;
         statusBar.SetMax(15);
         time = 0;
@@ -54,6 +57,7 @@ public class Fogon : MonoBehaviour
 
         acabado.enabled = false;
         statusBar.gameObject.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -82,7 +86,7 @@ public class Fogon : MonoBehaviour
 
         }
 
-        if (cocinado && !quemando && tieneObjecto)
+        if (cocinado && !quemando && tieneObjecto && puedeQuemarse)
         {
             time += Time.deltaTime;
             if (!warning)
@@ -125,6 +129,7 @@ public class Fogon : MonoBehaviour
 
                     if (obj.GetComponent<Olla>().numAlim == 0)
                     {
+                        tieneAlimento = true; 
                         boiling.Play();
                         humoParticulas.gameObject.SetActive(true);
                         cocinado = false; 
@@ -146,6 +151,7 @@ public class Fogon : MonoBehaviour
                             statusBar.Cut();
                             acabado.enabled = false;
                         }
+                        tieneAlimento = true; 
                         statusBar.time = 0;
                         cocinado = false;
                         GameObject newObject = obj.GetComponent<Olla>().AñadirAlimento(alim, posicionOlla);
@@ -183,6 +189,7 @@ public class Fogon : MonoBehaviour
         time = 0;
         //obj.GetComponent<Olla>().alimentoTerminado = false;
         tieneObjecto = false;
+        tieneAlimento = false; 
         tipoOlla = false; 
         cocinado = false;
         warning = false;
@@ -216,6 +223,7 @@ public class Fogon : MonoBehaviour
 
             if (utensilio.GetComponent<Olla>().tieneAlimento)
             {
+                tieneAlimento = true; 
                 utensilio.GetComponent<BoxCollider>().enabled = false;
                 //Empieza de nuevo la accion de cocinar
                 humoParticulas.gameObject.SetActive(true);
@@ -234,6 +242,7 @@ public class Fogon : MonoBehaviour
 
             if (utensilio.GetComponent<Sarten>().tieneAlimento)
             {
+                tieneAlimento = true; 
                 utensilio.GetComponent<BoxCollider>().enabled = false;
                 //Empieza de nuevo la accion de cocinar
                 humoParticulas.gameObject.SetActive(true);
@@ -266,7 +275,7 @@ public class Fogon : MonoBehaviour
             tipoPlato = "carne";
             newUtensilio = obj.GetComponent<Sarten>().VaciarSarten(posicionSarten);
         }
-
+        tieneAlimento = false; 
         Destroy(obj);
         boiling.Stop();
         freirAudio.Stop();
