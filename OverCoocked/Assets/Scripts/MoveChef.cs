@@ -5,7 +5,7 @@ using UnityEngine;
 public class MoveChef : MonoBehaviour
 {
 
-    public float speed = 10.0f;
+    public float speed ;
     public float rotationSpeed= 1100.0f;
     public bool can_move;
 

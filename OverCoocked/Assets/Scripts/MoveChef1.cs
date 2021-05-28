@@ -7,7 +7,7 @@ public class MoveChef1 : MonoBehaviour
 {
     public Animator anim; 
 
-    public float speed = 7.0f;
+    public float speed ;
     public float rotationSpeed= 1100.0f;
     public bool can_move;
 
