@@ -97,6 +97,8 @@ public class CuttingTable : MonoBehaviour
     {
         player.transform.parent = positionPlayer;
         player.transform.position = positionPlayer.position;
+
+        //player.transform.rotation = positionPlayer.rotation;
         player.GetComponent<MoveChef>().can_move = false;
         cortarAudio.Play();
 
