@@ -44,7 +44,6 @@ public class MesaEntrega : MonoBehaviour
 
         //Random rnd_t = new Random();
         timeMax = Random.Range(10, 21);
-        Debug.Log(timeMax); 
         time = 0;
         coinsParticles.gameObject.SetActive(false); 
         //string plato = recetas[Random.Range(0, 6)];

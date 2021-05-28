@@ -117,7 +117,6 @@ public class Fogon : MonoBehaviour
     { 
         if (tieneObjecto)
         {
-            Debug.Log("Estoy aqui");
             if (tipoOlla)
             {
                 if (alim.name.Contains("tomate_cortado") || alim.name.Contains("cebolla_cortado") || alim.name.Contains("champiñon_cortado"))
@@ -160,7 +159,6 @@ public class Fogon : MonoBehaviour
             }
             else //Tipo sarten
             {
-                Debug.Log("Estoy aqui"); 
                 if (alim.name.Contains("chuleta_cortada"))
                 {
                     freirAudio.Play(); 

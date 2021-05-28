@@ -9,7 +9,6 @@ public class Final : MonoBehaviour
     void Start()
     {
         StartCoroutine(Tiempo_final());
-        SceneManager.LoadScene("Scenes/Title scene");
     }
 
     void Update()
@@ -20,5 +19,6 @@ public class Final : MonoBehaviour
     IEnumerator Tiempo_final()
     {
         yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("Scenes/Title scene");
     }
 }

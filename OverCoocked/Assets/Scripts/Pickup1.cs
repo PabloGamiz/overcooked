@@ -175,7 +175,6 @@ public class Pickup1 : MonoBehaviour
         canGrabFood = false;
         canGrabPlate = false;
         puedeEntregar = false;
-        Debug.Log("HE SALIDO"); 
         fogon = false;
     }
 
@@ -245,7 +244,6 @@ public class Pickup1 : MonoBehaviour
         /* Colocar objecto en la mesa */
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            Debug.Log(puedeEntregar);
             if (!puedeEntregar)
             {
                 if (!table.GetComponent<InfoTable>().hasObject)
@@ -420,7 +418,6 @@ public class Pickup1 : MonoBehaviour
         }
         else if ((objectHolded.name.Contains("sarten") && objectHolded.GetComponent<Sarten>().alimentoTerminado) || (objectHolded.name.Contains("objAlimento") && objectHolded.name.Contains("cortado") && !objectHolded.name.Contains("champiñon")))
         {
-            Debug.Log("Quiero estar aqui"); 
             PrepararPlatoNormal(); 
         }
 

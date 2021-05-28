@@ -33,7 +33,6 @@ public class Pickup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("dentro de start");
         holdingObject = false; 
         canGrabPlate = false;
         fogon = false;
@@ -45,15 +44,11 @@ public class Pickup : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("dentro de update");
-        Debug.Log("dentro de update");
         if (GetComponent<MoveChef>().can_move)
         {
-            Debug.Log("dentro de poder moverse");
-            Debug.Log("valor de can: " + can);
+
             if (can)
             {
-                Debug.Log("dentro de can");
 
                 if (holdingObject)
                 {
@@ -73,7 +68,6 @@ public class Pickup : MonoBehaviour
             {
                 if (!holdingObject)
                 {
-                    Debug.Log("Coje comida");
                     GrabFood();
                     MoveChef1 mc = player.GetComponent<MoveChef1>();
                     mc.update_anim("Holding", true);
@@ -132,7 +126,6 @@ public class Pickup : MonoBehaviour
         }
         else if (collision.gameObject.name.Contains("mesa") && !collision.gameObject.name.Contains("platos"))
         {
-            Debug.Log("dentro de colision con mesa");
             can = true;
             table = collision.gameObject;
             
@@ -240,9 +233,7 @@ public class Pickup : MonoBehaviour
 
         obj.transform.parent = boxHolder;
         obj.transform.localPosition = Vector3.zero;
-        Debug.Log(obj.GetComponent<Objeto>().algo);
         obj.transform.rotation = Quaternion.Euler(obj.GetComponent<Objeto>().algo);
-        Debug.Log(obj.transform.rotation);
         obj.transform.localRotation = Quaternion.Euler(obj.GetComponent<Objeto>().algo); 
         obj.GetComponent<Rigidbody>().isKinematic = true;
         obj.GetComponent<Rigidbody>().useGravity = false;
@@ -260,7 +251,6 @@ public class Pickup : MonoBehaviour
         /* Colocar objecto en la mesa */
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            Debug.Log(puedeEntregar);
             if (!puedeEntregar)
             {
                 if (!table.GetComponent<InfoTable>().hasObject)
@@ -446,7 +436,6 @@ public class Pickup : MonoBehaviour
         }
         else if ((objectHolded.name.Contains("sarten") && objectHolded.GetComponent<Sarten>().alimentoTerminado) || (objectHolded.name.Contains("objAlimento") && objectHolded.name.Contains("cortado") && !objectHolded.name.Contains("champiñon")))
         {
-            Debug.Log("Quiero estar aqui"); 
             PrepararPlatoNormal(); 
         }
 

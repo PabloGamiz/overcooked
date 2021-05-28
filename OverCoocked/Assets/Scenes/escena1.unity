@@ -11646,7 +11646,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1122618692}
   m_LocalRotation: {x: 0.5735764, y: 0, z: 0, w: 0.8191521}
-  m_LocalPosition: {x: -30, y: 0.9, z: 13}
+  m_LocalPosition: {x: -27, y: 0.9, z: 13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -11950,7 +11950,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: c9781c81359e0414b8bd5286e13a2c20, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -12042,7 +12042,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1136409803}
-  m_Text: 2:30
+  m_Text: 3:30
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -12105,7 +12105,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1136409803}
   m_LocalRotation: {x: 0.5735764, y: 0, z: 0, w: 0.8191521}
-  m_LocalPosition: {x: 25, y: 1, z: 13}
+  m_LocalPosition: {x: 22, y: 1, z: 13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -15439,7 +15439,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1522959024}
   m_LocalRotation: {x: 0.5735764, y: 0, z: 0, w: 0.8191521}
-  m_LocalPosition: {x: -30, y: 0.8, z: 13}
+  m_LocalPosition: {x: -27, y: 0.8, z: 13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -17045,7 +17045,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1690177059}
-  m_Text: 2:30
+  m_Text: 3:30
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -17108,7 +17108,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1690177059}
   m_LocalRotation: {x: 0.5735764, y: 0, z: 0, w: 0.8191521}
-  m_LocalPosition: {x: 25, y: 0.9, z: 13}
+  m_LocalPosition: {x: 22, y: 0.9, z: 13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -18338,6 +18338,11 @@ PrefabInstance:
 --- !u!4 &1835616867 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8573520930146913082, guid: 03c6f739a406cba4ab9170d01347469f, type: 3}
+  m_PrefabInstance: {fileID: 1835616866}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1835616868 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9056900960180818304, guid: 03c6f739a406cba4ab9170d01347469f, type: 3}
   m_PrefabInstance: {fileID: 1835616866}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1835677551
@@ -20759,7 +20764,7 @@ PrefabInstance:
     - target: {fileID: 8681805853652301289, guid: 77d8f5dc98bd0234c9be4bf7b6907499, type: 3}
       propertyPath: obj
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1835616868}
     - target: {fileID: 9211955345279865737, guid: 77d8f5dc98bd0234c9be4bf7b6907499, type: 3}
       propertyPath: m_RootOrder
       value: 0

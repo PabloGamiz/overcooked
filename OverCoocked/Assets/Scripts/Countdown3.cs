@@ -17,7 +17,7 @@ public class Countdown3 : MonoBehaviour
     public GameObject ready1;
     public GameObject Escene1;
     public GameObject go1;
-    int seconds = 150;
+    int seconds = 210;
     bool takeAway = false;
     bool initial = true;
     bool finish_text = false;
@@ -80,19 +80,18 @@ public class Countdown3 : MonoBehaviour
         }
         else if (seconds == 0)
         {
-            musicaEscena.Stop(); 
-            player.GetComponent<MoveChef>().can_move = false;
-            Debug.Log("dentro de 0 segundos");
-            confeti.SetActive(true);
             StartCoroutine(esperar_confeti());
-            confeti.SetActive(false);
-            SceneManager.LoadScene("Scenes/escena4");
         }
 
     }
     IEnumerator esperar_confeti()
     {
+        musicaEscena.Stop();
+        player.GetComponent<MoveChef>().can_move = false;
+        confeti.SetActive(true);
         yield return new WaitForSeconds(3);
+        confeti.SetActive(false);
+        SceneManager.LoadScene("Scenes/escena4");
     }
 
     IEnumerator InitialTexts()
@@ -119,7 +118,6 @@ public class Countdown3 : MonoBehaviour
         takeAway = false;
         if (seconds % 15 == 0)
         {
-            Debug.Log("antes de escojer");
             escojerRecetas();
 
         }
@@ -144,9 +142,8 @@ public class Countdown3 : MonoBehaviour
     {
         if (numero_recetas < 5)
             ++numero_recetas;
-        Debug.Log("dentro escojer");
         int n = Random.Range(1, 9);
-        if (n >= 1 && n <= 1)
+        if (n >= 1 && n <= 3)
         {
             recetas.Add(2);
             if (numero_recetas < 5)
@@ -222,7 +219,6 @@ public class Countdown3 : MonoBehaviour
             }
             numero_recetas = 5;
         }
-        //Debug.Log("final crear");
     }
 
 
