@@ -375,7 +375,7 @@ TextMesh:
     A - move left                2 - go to level 2\n              S - move down              
     3 - go to level 3\n              D - move right               4 - go to level
     4\n              Q - grab/place               5 - go to level 5\n\t               
-    objects    \n              E - object interaction"
+    objects    \n              E - cut/use extinguisher"
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -652,7 +652,7 @@ TextMesh:
     A - move left                2 - go to level 2\n              S - move down              
     3 - go to level 3\n              D - move right               4 - go to level
     4\n              Q - grab/place               5 - go to level 5\n\t               
-    objects    \n              E - object interaction"
+    objects    \n              E - cut/use extinguisher"
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1

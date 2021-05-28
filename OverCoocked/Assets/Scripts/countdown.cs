@@ -18,7 +18,7 @@ public class Countdown : MonoBehaviour
     public GameObject ready1;
     public GameObject Escene1;
     public GameObject go1;
-    int seconds = 150;
+    int seconds = 210;
     bool takeAway = false;
     bool initial = true;
     bool finish_text = false;
@@ -43,10 +43,10 @@ public class Countdown : MonoBehaviour
     {
         musicaEscena.Play(); 
         numero_recetas = 0;
-        player.GetComponent<MoveChef>().can_move = false;
         recetas = new List<int>();
         objetos_recetas = new List<GameObject>();
         initial = true;
+        player.GetComponent<MoveChef>().can_move = false;
         Receta_b = Resources.Load("Receta_b") as GameObject;
         Receta_1 = Resources.Load("Receta_1") as GameObject;
         Receta_2 = Resources.Load("Receta_2") as GameObject;
@@ -83,19 +83,18 @@ public class Countdown : MonoBehaviour
         }
         else if (seconds == 0)
         {
-            player.GetComponent<MoveChef>().can_move = false;
-            Debug.Log("dentro de 0 segundos");
-            musicaEscena.Stop(); 
-            confeti.SetActive(true);
             StartCoroutine(esperar_confeti());
-            confeti.SetActive(false);
-            SceneManager.LoadScene("Scenes/escena2");
         }
 
     }
     IEnumerator esperar_confeti()
     {
+        player.GetComponent<MoveChef>().can_move = false;
+        musicaEscena.Stop();
+        confeti.SetActive(true);
         yield return new WaitForSeconds(3);
+        confeti.SetActive(false);
+        SceneManager.LoadScene("Scenes/escena2");
     }
 
     IEnumerator InitialTexts()
@@ -122,7 +121,6 @@ public class Countdown : MonoBehaviour
         takeAway = false;
         if (seconds % 15 == 0)
         {
-            Debug.Log("antes de escojer");
             escojerRecetas();
 
         }
@@ -147,9 +145,9 @@ public class Countdown : MonoBehaviour
     {
         if (numero_recetas < 5)
             ++numero_recetas;
-        Debug.Log("dentro escojer");
+
         int n = Random.Range(1, 9);
-        if (n >= 1 && n <= 1)
+        if (n >= 1 && n <= 3)
         {
             recetas.Add(1);
             if (numero_recetas < 5)
@@ -169,16 +167,14 @@ public class Countdown : MonoBehaviour
                 objetos_recetas.Add((GameObject)Instantiate(Receta_4, new Vector3(-5.5f + 2.75f * (numero_recetas - 1), 14, -10.75f), Receta_4.transform.rotation));
         }
 
-        Debug.Log("final escojer");
-        Debug.Log("tamaño recetas: " + recetas.Count);
+
     }
 
     void actualizar_recetas(int n)
     {
-        Debug.Log("dentro crear");
+
         if (recetas.Count < 5 && recetas.Count != 0)
         {
-            Debug.Log("dentro <5");
             for (int i = (n - 1); i < recetas.Count; ++i)
             {
 
@@ -201,15 +197,11 @@ public class Countdown : MonoBehaviour
                 else
                     objetos_recetas.Add((GameObject)Instantiate(Receta_8, new Vector3(-5.5f + 2.75f * i, 14, -10.75f), Receta_8.transform.rotation));
 
-                Debug.Log("crea objeto");
-                //obj.GetComponent<change_material>().cambiar_material(recetas[i]);
-                Debug.Log("ha cambiado material");
             }
             numero_recetas = recetas.Count;
         }
         else if (recetas.Count != 0)
         {
-            Debug.Log("dentro >=5");
             for (int i = (n - 1); i < 5; ++i)
             {
                 if (recetas[i] == 0)
@@ -235,7 +227,6 @@ public class Countdown : MonoBehaviour
             }
             numero_recetas = 5;
         }
-        //Debug.Log("final crear");
     }
 
 
