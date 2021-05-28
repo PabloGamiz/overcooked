@@ -15,7 +15,7 @@ public class Countdown : MonoBehaviour
     public GameObject ready1;
     public GameObject Escene1;
     public GameObject go1;
-    int seconds = 10;
+    int seconds = 150;
     bool takeAway = false;
     bool initial = true;
     bool finish_text = false;

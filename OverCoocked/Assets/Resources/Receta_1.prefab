@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2081026002960162929}
   - component: {fileID: 2081026002960162934}
   - component: {fileID: 2081026002960162935}
-  - component: {fileID: 69048883969205606}
   m_Layer: 0
   m_Name: Receta_1
   m_TagString: Untagged
@@ -55,7 +54,7 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
+  m_ReflectionProbeUsage: 0
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
@@ -97,16 +96,3 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &69048883969205606
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2081026002960162932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81fc4da2e32f921458f98e7420bb5929, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  material: []
